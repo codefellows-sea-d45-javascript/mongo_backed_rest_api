@@ -1,13 +1,11 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
-  ,Schema = mongoose.Schema;
-
-var ninjaSchema = Schema({
+var ninjaSchema = new mongoose.Schema({
   name      : String,
-  superPower: String,
-  weapon    : String,
-  food      : String,
-  country   : String,
+  superPower: {type: String, default: 'invisibility'},
+  weapon    : {type: String, default: 'brass knuckles'},
+  food      : {type: String, default: 'will power'},
+  country   : {type: String, default: 'Ninjland'}
 });
 
 module.exports = mongoose.model('Ninja', ninjaSchema);

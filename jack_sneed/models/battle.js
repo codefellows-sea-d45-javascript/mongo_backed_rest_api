@@ -1,9 +1,7 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var Ninja = require('./ninja');
 
-  ,Schema = mongoose.Schema;
-var Ninja = require(__dirname + '/models/ninja');
-
-var battleSchema = Schema({
+var battleSchema = new mongoose.Schema({
   wins      : {type: Number, ref: 'Ninja'},
   losses    : {type: Number, ref: 'Ninja'},
   partyFouls: {type: Number, ref: 'Ninja'}
