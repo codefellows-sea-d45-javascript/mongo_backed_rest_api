@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Tapir = require(__dirname + '/../models/tapir');
 var handleError = require(__dirname + '/../lib/handleServerError');
+var currentTime = require(__dirname + '/../lib/date.js');
 
 var tapirsRouter = module.exports = exports = express.Router();
 
@@ -20,6 +21,7 @@ tapirsRouter.post('/tapirs', bodyParser.json(), function(req, res) {
   newTapir.save(function(err, data) {
     if (err) return handleError(err, res);
 
+    currentTime();
     res.json(data);
   });
 });
