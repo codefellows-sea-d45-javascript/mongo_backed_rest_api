@@ -11,7 +11,7 @@ mongoose.connect(process.env.MONGOLAB_URI ||
 app.use('/api', sayingsRouter);
 
 app.use(function(req, res) {
-  res.redirect(300, '/api');
+  res.redirect(301, '/api');
 });
 
 app.listen(process.env.PORT || 3000, function() {

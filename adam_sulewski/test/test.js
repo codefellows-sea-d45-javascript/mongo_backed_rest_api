@@ -2,6 +2,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var expect = chai.expect;
+var fs = require('fs');
 
 process.env.MONGOLAB_URI = 'mongodb://localhost/sayings_es_test';
 require(__dirname + '/../server');
@@ -47,7 +48,7 @@ describe('saying routes', function() {
       }.bind(this));
     });
 
-    it('should be able to update a saying', function() {
+    it('should be able to update a saying', function(done) {
       chai.request('localhost:3000')
         .put('/api/sayings/' + this.saying._id)
         .send({name: 'new test name'})
@@ -66,6 +67,21 @@ describe('saying routes', function() {
           expect(res.body.msg).to.eql('success!');
           done();
         });
+    });
+  });
+
+  describe('index.html', function() {
+    beforeEach(function() {
+      this.index = fs.readFileSync(__dirname + '/../public/index.html').toString();
+    });
+
+    it('should server a static file', function(done) {
+      chai.request('localhost:3000')
+        .get('/api')
+        .end(function(err, res) {
+          expect(res.text).to.eql(this.index);
+          done();
+        }.bind(this));
     });
   });
 });
