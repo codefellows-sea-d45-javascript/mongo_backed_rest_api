@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var tapirSchema = new mongoose.Schema({
   name: String,
-  type: {type: String, default: 'Malayan'},
+  flavor: {type: String, default: 'Malayan'},
   diet: {type: String, default: 'veggies'},
   age: Number,
   weight: Number
