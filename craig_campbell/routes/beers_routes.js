@@ -21,10 +21,12 @@ beersRouter.post('/beers', bodyParser.json(), function(req, res){
 });
 
 beersRouter.put('/beers/:id', bodyParser.json(), function(req, res){
+  console.log(req.body);
   var beerData = req.body;
   delete beerData._id;
-  Beer.update({_id: req.body.id}, beerData, function(err){
+  Beer.update({_id: req.params.id}, beerData, function(err){
     if (err) return handleError(err, res);
+    console.log(req.body);
     res.send({msg: 'updated!'});
   });
 });
@@ -35,3 +37,14 @@ beersRouter.delete('/beers/:id', function(req, res){
     res.send({msg: 'deleted!'});
   });
 });
+
+beersRouter.get('/beers/:brewery', function(req, res){
+  /// get route that that will search the DB  by brewery name, and pull up all the beers for that brewery
+
+  Beer.find({brewery: req.params.brewery}, function(err, data){
+    if (err) return handleError(err, res);
+    res.send(data)
+  });
+
+});
+

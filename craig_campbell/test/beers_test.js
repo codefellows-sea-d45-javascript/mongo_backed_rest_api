@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 process.env.MONGOLAB_URI = 'mongodb://localhost/beer_test';
 require(__dirname + '/../server.js');
 
-describe('beer routes', function(){
+describe('beer_routes', function(){
   after(function(done){
     mongoose.connection.db.dropDatabase(function(){
       done();
@@ -72,9 +72,21 @@ describe('beer routes', function(){
   });
 });
 
+describe('non_api_routes', function(){
+  it('should display a the name speicified in the route in CAPS and send back that they like beer', function(){
+    chai.request('localhost:3000')
+    .get('/jim')
+    .end(function(err, res){
+      expect(err).to.eql(null);
+      expect(res.status).to.eql(200);
+      expect(res.text).to.eql("My name is JIM and I like me some beer.");
+    });
+  });
+});
+
 describe('some things I have not yet written', function(){
 
     it('should test the additonal mongoose feature that I have yet to implement');
 
-    it('should test the index.html or whatever other non-CRUD thing I do whenever I get around to doing it');
+
 });
