@@ -5,6 +5,12 @@ var handleError = require(__dirname + '/../lib/handleError');
 
 var sayingsRouter = module.exports = exports = express.Router();
 
+sayingsRouter.use(express.static(__dirname + '/../public'));
+
+sayingsRouter.get('/', function(req, res) {
+  res.sendFile(__dirname + '/../public/index.html');
+});
+
 sayingsRouter.get('/sayings', function(req, res) {
   Saying.find({}, function(err, data) {
     if (err) return handleError(err, res);

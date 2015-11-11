@@ -10,6 +10,10 @@ mongoose.connect(process.env.MONGOLAB_URI ||
 
 app.use('/api', sayingsRouter);
 
+app.use(function(req, res) {
+  res.redirect(300, '/api');
+});
+
 app.listen(process.env.PORT || 3000, function() {
-  console.log('el servidor esta listo');
+  console.log('server up');
 });
