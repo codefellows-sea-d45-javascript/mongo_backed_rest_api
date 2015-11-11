@@ -54,7 +54,7 @@ describe('beer routes', function(){
       .send({name: 'garbage', style: 'not even beer, really'})
       .end(function(err, res){
         expect(err).to.eql(null);
-        expect(res.body.msg).to.eql('modified!');
+        expect(res.body.msg).to.eql('updated!');
         done();
       });
     });
