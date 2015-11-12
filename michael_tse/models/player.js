@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 
+var min = []
+
 var playerBase = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
+  firstName: {type: String, required: true},
+  lastName: {type: String, required: 'Please give a Last Name'},
   position: {type: String, default: '-'},
-  number: Number,
+  number: {type: Number,  min: 0, max: 99},
+  team: {type: String, default: 'free agent'},
   bat: String,
   throwing: String,
 });
