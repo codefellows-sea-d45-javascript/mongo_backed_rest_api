@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 var ninjaRouter = require(__dirname + '/routes/ninja_routes');
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/ninja_stream_dev');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/ninja_base');
 
 app.use('/api', ninjaRouter);
 
