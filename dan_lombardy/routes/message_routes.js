@@ -31,20 +31,20 @@ messagesRouter.get('/messages/*', function(req, res){
       console.log("There was a connection error of " + err);
       res.status(500).json({errmsg: "There was a connection error"})
     };
-    console.log(data);
-    if(data == '[]'){
+
+    if(data.length === 0){
+      console.log("I am firing");
       console.log("Client tried to get an object that doesnt exist");
-      res.status(404).json({errmsg: "That message does not exist"});
-      res.json()
+      return res.status(404).json({errmsg: "That message does not exist"});
+
     }
 
     var alert = "a self destruct count for the client";
-
+    var adder = data[0].views + 1;
 
     if(data[0].views >= 3){
-      console.log("Message with title" + data[0].oneWordTitle + " self destructed!");
-      data[0].destructMessage = "BOOOOM! Your message self destructed because you reached 3 views!";
-
+      console.log("Message with title " + data[0].oneWordTitle + " self destructed!");
+      data[0].destructMessage = "BOOM! Your message self-destructed!";
       Message.remove({oneWordTitle: title}, function(err){
         if(err) return function(err, res){
           console.log("There was a connection error of " + err);
@@ -57,37 +57,51 @@ messagesRouter.get('/messages/*', function(req, res){
       });
     }
 
-    var adder = data[0].views + 1;
-
     if(data[0].views === 2){
 
-      data[0].views = adder;
       console.log("Message has one view left");
       alert = "If you GET this message again it will self destruct!";
-      Message.update({oneWordTitle: title},{destructMessage: alert, views:adder}, function(err){
+      Message.findOneAndUpdate({oneWordTitle: title},{$set:{destructMessage: alert, views:adder}}, {new:true}, function(err, doc){
         if(err) return function(err, res){
           console.log("There was a connection error of " + err);
           res.status(500).json({errmsg: "There was a connection error"})
         };
 
-          res.json(data);
-          console.log("Saved messeage back to database");
+          console.log("View 3  should be" + doc);
+          res.json(doc);
+          console.log("Saved view3 back to database");
       });
     }
 
     if(data[0].views === 1){
-
-      data[0].views = adder;
-      console.log("Message has two views left");
-      alert = "You can GET this message 2 more times and then it self destructs!";
-      Message.update({oneWordTitle: title},{destructMessage: alert, views:adder}, function(err){
+      alert = "You can GET this message 2 more time and it self destructs!";
+      console.log("Message has one view left");
+      Message.findOneAndUpdate({oneWordTitle: title},{$set:{destructMessage: alert, views:adder}},{new:true}, function(err, doc){
         if(err) return function(err, res){
           console.log("There was a connection error of " + err);
           res.status(500).json({errmsg: "There was a connection error"})
         };
 
-          res.json(data);
-          console.log("Saved messeage back to database");
+          console.log("View 2 should be" + doc);
+          res.json(doc);
+          console.log("Saved view2 back to database");
+      });
+    }
+
+    if(data[0].views === 0){
+      alert = "You can GET this message 3 more times and it self destructs!";
+      data[0].destructMessage = alert;
+      console.log("Message has two views left");
+
+      Message.findOneAndUpdate({oneWordTitle: title},{$set:{destructMessage: alert, views:adder}},{new:true}, function(err, doc){
+        if(err) return function(err, res){
+          console.log("There was a connection error of " + err);
+          res.status(500).json({errmsg: "There was a connection error"})
+        };
+
+          console.log("View 1 should be" + doc);
+          res.json(doc);
+          console.log("Saved view1 back to database");
       });
     }
 
