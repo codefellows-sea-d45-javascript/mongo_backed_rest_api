@@ -39,6 +39,16 @@ describe('player routes', function() {
     });
   });
 
+  it('should return the total number of players stored in the database', function(done) {
+    chai.request('localhost:3000')
+    .get('/api/player')
+    .end(function(err, res) {
+      expect(err).to.eql(null);
+      expect(res).to.have.headers;
+      done();
+    });
+  });
+
   describe('to modify the player database', function() {
     beforeEach(function(done) {
       (new Player({firstName: 'David', lastName: 'Price', team: 'free_agent',})).save(function(err, data) {
