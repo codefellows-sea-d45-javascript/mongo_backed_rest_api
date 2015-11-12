@@ -1,20 +1,11 @@
 //Created with help from http://mongoosejs.com/docs/index.html
 var mongoose = require('mongoose');
-
-var db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function(){
-  console.log('db connection open');
-});
+var reviewSchema = require(__dirname + '/review.js').reviewSchema;
 
 var recipeSchema = mongoose.Schema({
   title: String,
-  ingredients: Array
+  ingredients: Array,
+  reviews: [reviewSchema]
 });
 
-var Recipe = module.exports = mongoose.model('Recipe', recipeSchema);
-
-// var tacos = new Recipe({title: 'Tacos', ingredients: ['meat', 'cheese']});
-
-// console.log(tacos);
+var Recipe = module.exports.Recipe = mongoose.model('Recipe', recipeSchema);
