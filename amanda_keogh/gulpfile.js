@@ -19,6 +19,7 @@ gulp.task('jshint:testfiles', function() {
       node: true,
       globals: {
         before: true,
+        after: true,
         it: true,
         expect: true
       }
