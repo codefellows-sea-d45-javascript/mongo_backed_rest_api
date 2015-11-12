@@ -1,8 +1,8 @@
 var express = require('express');
-var bpdyParser = require('body-parser');
+var bodyParser = require('body-parser');
 var handleError = require(__dirname + '/../lib/handleServerError');
 
-var Book = require(__dirname + '/../models/bear');
+var Book = require(__dirname + '/../models/book');
 
 // read
 booksRouter.get('/books', function(req, res) {

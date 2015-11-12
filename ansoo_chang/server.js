@@ -4,7 +4,7 @@ var  booksRouter = require(__dirname, '/routes/books_routes');
 
 var app = express();
 
-//mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/book_dev');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/book_dev');
 
 //app.use('/api', booksRouter);
 
