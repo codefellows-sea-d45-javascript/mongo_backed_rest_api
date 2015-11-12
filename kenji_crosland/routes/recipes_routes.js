@@ -9,15 +9,15 @@ recipeRouter.get('/recipes', function(req, res){
   Recipe.find({}, function(err, data){
     if (err) throw err;
     res.json(data);
-  })
-})
+  });
+});
 
 recipeRouter.post('/recipes', bodyParser.json(), function(req, res){
   var newRecipe = new Recipe(req.body);
   newRecipe.save(function(err, data){
     if (err) throw err;
     res.json(data);
-  })
+  });
 });
 
 //Pushing a new review to the recipes review array
@@ -31,7 +31,6 @@ recipeRouter.put('/recipes/review/:id', bodyParser.json(), function(req, res){
 
 recipeRouter.put('/recipes/:id', bodyParser.json(), function(req, res){
   var recipeData = req.body;
-  delete recipeData._id;
   Recipe.update({_id: req.params.id}, recipeData, function(err){
     if (err) throw err;
     res.json({msg: 'Recipe updated!'});
@@ -42,5 +41,5 @@ recipeRouter.delete('/recipes/:id', function(req, res){
   Recipe.remove({_id: req.params.id}, function(err){
     if (err) return err;
     res.json({msg: 'Recipe deleted!'});
-  })
-})
+  });
+});

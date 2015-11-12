@@ -10,5 +10,5 @@ ingredientsRouter.get('/recipes-made-with/:ingredient', function(req, res){
   Recipe.find({ingredients: ingredient}, function(err, data){
     if (err) throw err;
     res.json(data);
-  })
-})
+  });
+});

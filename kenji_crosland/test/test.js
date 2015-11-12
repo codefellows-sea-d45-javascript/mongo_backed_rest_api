@@ -80,20 +80,17 @@ describe('recipe routes', function(){
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.eql(true);
         done();
-      })
-    })
+      });
+    });
 
     it('should be deleted by a DELETE request', function(done){
       chai.request('http://localhost:3000')
       .delete('/recipes/' + this.recipe._id)
       .end(function(err, res){
         expect(err).to.eql(null);
-        expect(res.body.msg).to.eql('Recipe deleted!')
+        expect(res.body.msg).to.eql('Recipe deleted!');
         done();
-      })
-    })
-
-
+      });
+    });
   });
-
-})
+});
