@@ -1,0 +1,22 @@
+{
+  "name": "11-10-15",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "mongodb": "~2.0.48",
+    "express": "~4.13.3",
+    "mongoose": "~4.2.5",
+    "body-parser": "~1.14.1"
+  },
+  "devDependencies": {
+    "chai": "~3.4.1",
+    "mocha": "~2.3.3",
+    "chai-http": "~1.0.0"
+  }
+}
