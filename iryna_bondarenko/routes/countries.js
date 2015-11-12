@@ -33,7 +33,7 @@ countryRouter.put('/country/:id', bodyParser.json(), function(req, res) {
   });
 });
 
-countryRouter.delete('/bears/:id', function(req, res) {
+countryRouter.delete('/country/:id', function(req, res) {
   Country.remove({_id: req.params.id}, function(err) {
     if (err) return handleError(err, res);
 
