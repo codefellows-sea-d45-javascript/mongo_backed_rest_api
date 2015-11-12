@@ -9,12 +9,12 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/movies_test';
 require(__dirname + '/../server');
 
 describe('the movie router', function() {
-  after(function(done){
-    mongoose.connection.db.dropDatabase(function(){
+  after(function(done) {
+    mongoose.connection.db.dropDatabase(function() {
       done();
     });
   });
-  it('should be able to add a movie to the database', function(done){
+  it('should be able to add a movie to the database', function(done) {
     var testMovie = {
       title: 'test',
     };
@@ -29,28 +29,29 @@ describe('the movie router', function() {
         done();
       });
   });
-  it('should have an error if there is no title', function(done){
-  var testMovie = {
+  it('should have an error if there is no title', function(done) {
+    var testMovie = {
     year: '1986',
     director: 'Bob Smith'
   };
-  chai.request('localhost:3000')
-    .post('/api/movies')
-    .send(testMovie)
-    .end(function(err, res) {
+    chai.request('localhost:3000')
+      .post('/api/movies')
+      .send(testMovie)
+      .end(function(err, res) {
       expect(err).to.eql(null);
       expect(res.status).to.eql(200);
       expect(res.text).to.eql('server error');
       done();
     });
   });
-  it('should have an error if the year is too high', function(done){
+  it('should have an error if the year is too high', function(done) {
+    var nextYear = new Date().getFullYear() + 1;
     var testMovie = {
       title: 'testmovie',
-      year: '2032',
+      year: nextYear,
       director: 'Bob Smith'
     };
-  chai.request('localhost:3000')
+    chai.request('localhost:3000')
     .post('/api/movies')
     .send(testMovie)
     .end(function(err, res) {
@@ -60,13 +61,13 @@ describe('the movie router', function() {
       done();
     });
   });
-  it('should have an error if there is too low', function(done){
-  var testMovie2 = {
+  it('should have an error if the year is too low', function(done) {
+    var testMovie2 = {
     title: 'testmovie',
     year: '1812',
     director: 'Bob Smith'
   };
-  chai.request('localhost:3000')
+    chai.request('localhost:3000')
     .post('/api/movies')
     .send(testMovie2)
     .end(function(err, res) {
@@ -76,12 +77,12 @@ describe('the movie router', function() {
       done();
     });
   });
-  it('should be able to get all the movies', function(done){
-  var testMovie2 = {
+  it('should be able to get all the movies', function(done) {
+    var testMovie2 = {
     year: '1986',
     director: 'Bob Smith'
   };
-  chai.request('localhost:3000')
+    chai.request('localhost:3000')
     .get('/api/movies')
     .end(function(err, res) {
       expect(err).to.eql(null);
@@ -89,5 +90,5 @@ describe('the movie router', function() {
       expect(Array.isArray(res.body)).to.eql(true);
       done();
     });
-  });    
+  });
 });

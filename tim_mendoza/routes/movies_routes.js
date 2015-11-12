@@ -8,7 +8,7 @@ var handleError = function(err, res) {
 };
 
 moviesRouter.get('/movies', function(req, res) {
-  Movie.find({}, function(err, data){
+  Movie.find({}, function(err, data) {
     if (err) return handleError(err, res);
     res.json(data);
   });
