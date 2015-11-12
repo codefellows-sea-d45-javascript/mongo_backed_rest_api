@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var morderorSchema = new mongoose.Schema({
-  name: string,
+  name: String,
   morders: {name: String, verb: String},
   morderedBy: {name: String, verb: String}
 });
 
-modules.exports = exports = mongoose.model('Morderor', morderorSchema);
+module.exports = exports = mongoose.model('Morderor', morderorSchema);

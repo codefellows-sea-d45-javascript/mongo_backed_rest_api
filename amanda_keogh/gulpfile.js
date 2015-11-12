@@ -26,8 +26,13 @@ gulp.task('jshint:testfiles', function() {
     .pipe(jshint.reporter('default'));
 });
 
+gulp.task('mocha', function() {
+  return gulp.src(appFiles)
+    .pipe(mocha());
+})
+
 gulp.task('watch', function() {
-  gulp.watch(appFiles, ['jshint:appfiles']);
+  gulp.watch(appFiles, ['jshint:appfiles', 'mocha']);
   gulp.watch(testFiles, ['jshint:appfiles']);
 })
 
