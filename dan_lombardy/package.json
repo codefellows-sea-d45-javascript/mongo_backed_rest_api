@@ -1,0 +1,28 @@
+{
+  "name": "self_descruct_messages",
+  "version": "0.1.0",
+  "description": "You have five chances to view a message. Afer the fifth view, it self destructs",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Dan Lombardy",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "mongoose": "^4.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gulp-jshint": "^1.12.0",
+    "gulp-mocha": "^2.1.3",
+    "jshint": "^2.8.0",
+    "mocha": "^2.3.3"
+  }
+}
