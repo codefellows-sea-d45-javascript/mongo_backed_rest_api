@@ -40,10 +40,9 @@ beersRouter.delete('/beers/:id', function(req, res){
 
 beersRouter.get('/beers/:brewery', function(req, res){
   /// get route that that will search the DB  by brewery name, and pull up all the beers for that brewery
-
   Beer.find({brewery: req.params.brewery}, function(err, data){
     if (err) return handleError(err, res);
-    res.send(data)
+    res.send(data);
   });
 
 });

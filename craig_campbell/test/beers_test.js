@@ -8,20 +8,38 @@ process.env.MONGOLAB_URI = 'mongodb://localhost/beer_test';
 require(__dirname + '/../server.js');
 
 describe('beer_routes', function(){
+  before(function(done){
+  this.beerData = {name: 'test beer',brewery:'some brewery', style: 'cheap beer', notes: 'are you sure this is even beer?'};
+  done();
+  });
+
   after(function(done){
     mongoose.connection.db.dropDatabase(function(){
       done();
     });
   });
 
+  it('should GET you a menu of all the beers at a particular brewery', function(done){
+    chai.request('localhost:3000')
+    .get('/api/beers/some brewery')
+    .send(this.beerData)
+    .end(function(err, res){
+      expect(err).to.eql(null);
+      expect(res.status).to.eql(200);
+      expect(Array.isArray(res.body)).to.eql(true);
+      done();
+    });
+  });
+
   it('should be able to brew (create aka POST) a beer', function(done){
-    var beerData = {name: 'test beer', style: 'cheap beer', notes: 'are you sure this is even beer?'};
+
     chai.request('localhost:3000')
     .post('/api/beers')
-    .send(beerData)
+    .send(this.beerData)
     .end(function(err, res){
       expect(err).to.eql(null);
       expect(res.body.name).to.eql('test beer');
+      expect(res.body.brewery).to.eql('some brewery');
       expect(res.body.style).to.eql('cheap beer');
       expect(res.body.notes).to.eql('are you sure this is even beer?');
       expect(res.body).to.have.property('_id'); //this comes from mongo so we know we are really getting a response back after posting mongo
@@ -84,9 +102,3 @@ describe('non_api_routes', function(){
   });
 });
 
-describe('some things I have not yet written', function(){
-
-    it('should test the additonal mongoose feature that I have yet to implement');
-
-
-});
