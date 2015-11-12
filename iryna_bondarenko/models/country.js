@@ -1,9 +1,16 @@
 var mongoose = require('mongoose');
 
 var countrySchema = new mongoose.Schema({
-  name: String,
+  name: {type: String, required: true},
   places: String,
-  Duration: Number,
+  durationDays: {type: Number, validate: {
+	  validator: function(value) {
+		  Number.max = 365;
+		  return value == 1;
+	  },
+	  message: "Please, enter correct duration"
+		},
+  },
   description: String
 });
 
