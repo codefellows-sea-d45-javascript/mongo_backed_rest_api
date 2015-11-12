@@ -26,7 +26,7 @@ playerRouter.post('/player', bodyParser.json(), function(req, res) {
 playerRouter.put('/player/:id', bodyParser.json(), function(req, res) {
   var playerData = req.body;
   delete playerData._id;
-  Player.update({_id: req.params.id}, playerData, function(err, data) {
+  Player.update({_id: req.params.id.toString()}, playerData, function(err, data) {
     if (err) handleError(err, res);
 
     res.json({msg: 'update success!'});

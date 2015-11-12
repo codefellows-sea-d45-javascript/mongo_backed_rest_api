@@ -3,7 +3,7 @@ var chaihttp = require('chai-http');
 chai.use(chaihttp);
 var expect = chai.expect;
 
-process.env.MONGOLAB_URL = 'mongodb://localhost/player_test';
+process.env.MONGOLAB_URI = 'mongodb://localhost/player_test';
 require(__dirname + '/../server');
 var mongoose = require('mongoose');
 var Player = require(__dirname + '/../models/player');
@@ -29,9 +29,9 @@ describe('player routes', function() {
       });
   });
 
-  it('should be able to get all players', function(done) {
+  it('should be able to get all players from a team', function(done) {
     chai.request('localhost:3000')
-    .get('/api/players/Mariners')
+    .get('/api/player/Mariners')
     .end(function(err, res) {
       expect(err).to.eql(null);
       expect(Array.isArray(res.body)).to.eql(true);
@@ -39,9 +39,9 @@ describe('player routes', function() {
     });
   });
 
-  describe('need something', function() {
+  describe('to modify the player database', function() {
     beforeEach(function(done) {
-      (new Player({firstName: "'David'", lastName: "'Price'", team: "'free agent'",})).save(function(err, data) {
+      (new Player({firstName: 'David', lastName: 'Price', team: 'free_agent',})).save(function(err, data) {
         expect(err).to.eql(null);
         this.player = data;
         done();
@@ -54,7 +54,7 @@ describe('player routes', function() {
         .send({team: 'Mariners'})
         .end(function(err, res) {
           expect(err).to.eql(null);
-          expect(res.data.msg).to.eql('update success!');
+          expect(res.body.msg).to.eql('update success!');
           done();
         });
     });
