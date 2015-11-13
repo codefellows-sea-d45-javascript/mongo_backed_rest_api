@@ -25,21 +25,3 @@ tapirsRouter.post('/tapirs', bodyParser.json(), function(req, res) {
     res.json(data);
   });
 });
-
-tapirsRouter.put('/tapirs/:id', bodyParser.json(), function(req, res) {
-  var tapirData = req.body;
-  delete tapirData._id;
-  Tapir.update({_id: req.params.id}, tapirData, function(err) {
-    if (err) return handleError(err, res);
-
-    res.json({msg: 'success!'});
-  });
-});
-
-tapirsRouter.delete('/tapirs/:id', function(req, res) {
-  Tapir.remove({_id: req.params.id}, function(err) {
-    if (err) return handleError(err, res);
-
-    res.json({msg: 'success!'});
-  });
-});
