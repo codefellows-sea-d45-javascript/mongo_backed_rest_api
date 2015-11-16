@@ -1,0 +1,26 @@
+{
+  "name": "spencer_caldwell",
+  "version": "0.1.0",
+  "description": "This is a place to store unicorns",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "unicorns",
+    "rainbows"
+  ],
+  "author": "spencer.caldwell@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.5"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chai-http": "^1.0.0",
+    "mocha": "^2.3.3"
+  }
+}
