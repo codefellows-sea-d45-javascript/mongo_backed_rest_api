@@ -37,6 +37,7 @@ countryRouter.delete('/country/:id', function(req, res) {
 });
 
 //non-crud resource
+
 countryRouter.get('/country/:id', function(req, res) {
   Country.find({_id: req.params.id}.count(function(err, count) {
     if (err) return handleError(err, res);
