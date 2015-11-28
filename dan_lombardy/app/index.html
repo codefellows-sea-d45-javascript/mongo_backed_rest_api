@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Self Destruct Message Description</title>
+</head>
+<body data-ng-app="destuctDescribe">
+  <main data-ng-controller="DescriptionController">
+    <h1>Self Destruct Messenger</h1>
+    <p>
+      Got messages that are sensitive? Do you like more stress in your life?
+      Want to test your memory? Just want to feel like a secret agent for once in your
+      life?
+    </p>
+    <p> Then use the Self Destruct Messgenger. Post messages for yourself or other viewers. Every time
+      a user views the message, a counter ticks off. Once the counter gets to 4, BOOM no more message.
+    </p>
+    <section>
+      <h2>POST a Message</h2>
+      <p>
+        To create a new message, make a POST request to "api/messages" that contains a JSON object
+        with the following key-values (the values are the value type):
+      </p>
+<pre>
+{"oneWordTitle": String, "oneWordTitle": String, "secretToRead": String, "priority": Number}
+</pre>
+    </section>
+    <section>
+      <h2>GET All Messages</h2>
+      <p>
+        To see all available messages, make a GET request to "api/messages".
+      </p>
+      <p>
+        NOTE: Viewing a message title in this way does not contribute to or destory a message.
+      </p>
+    </section>
+    <section>
+      <h2>GET Your Message</h2>
+      <p>To view your desired message, make a GET request to "api/{oneWordTitle}" where {oneWordTitle}
+        is the oneWordTitle of the message you would like to view.
+      </p>
+      <p>
+        NOTE: Viewing a message this way causes a message to either increase count towards or to self destruct.
+        Every time you view a message you will receive a console log that tells you how many views you have left.
+      </p>
+    </section>
+    <section>
+      <h2>Nifty Two Way Bind</h2>
+      <p>In celebration of all things temporary, check out this nifty two way binding. The heading changes as you type
+        but if you refresh the page, it will disappear...
+
+      <h3>{{nifty}}</h3>
+    </section>
+
+    <input type="text"  data-ng-model="nifty">
+  </main>
+  <script src="bundle.js"></script>
+</body>
+</html>
