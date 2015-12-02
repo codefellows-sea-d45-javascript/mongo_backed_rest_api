@@ -4,8 +4,34 @@
     <meta charset="utf-8">
     <title>Movies</title>
   </head>
-  <body>
+  <body data-ng-app="MoviesApp">
+    <h1>Movies!</h1>
+    <main data-ng-controller="MoviesController" data-ng-init="getAll()">
 
-  <script src="bundle.js" charset="utf-8"></script>
+      <form name="newMovieForm" data-ng-submit="create(newMovie)">
+        <label for="movieTitle">Title:</label>
+        <input type="text" name="movieTitle" data-ng-model="newMovie.title">
+
+        <label for="movieYear">Year:</label>
+        <input type="text" name="movieYear" data-ng-model="newMovie.year">
+
+        <label for="movieDirector">Director:</label>
+        <input type="text" name="movieDirector" data-ng-model="newMovie.director">
+
+        <label for="movieActors">Actors:</label>
+        <input type="text" name="movieActors" data-ng-model="newMovie.actors">
+
+        <button type="submit">Create New Movie</button>
+      </form>
+
+      <ul>
+        <li data-ng-repeat="movie in movies">
+          {{movie.title}}
+          <button type="button" data-ng-click="remove(movie)">Delete Movie</button>
+        </li>
+
+      </ul>
+    </main>
+    <script src="bundle.js" charset="utf-8"></script>
   </body>
 </html>
