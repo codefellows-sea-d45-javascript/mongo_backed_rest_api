@@ -39,10 +39,9 @@ module.exports = function(app) {
     };
 
     $scope.edit = function(movie) {
-      $scope.movies.splice($scope.movies.indexOf(movie), 1)
+      $scope.movies.splice($scope.movies.indexOf(movie), 1);
       $scope.editing = true;
-
-    //  $scope.tempMovie = Object.create(Object, movie); //this doesn't quite work yet
+      $scope.tempMovie = angular.copy(movie);
       $scope.newMovie = movie;
     };
 
@@ -63,7 +62,7 @@ module.exports = function(app) {
         function(res) {
           console.log(res);
         }
-      )
+      );
     };
 
   }]);
