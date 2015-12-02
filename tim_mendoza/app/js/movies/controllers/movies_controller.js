@@ -1,6 +1,7 @@
 module.exports = function(app) {
   app.controller('MoviesController', ['$scope', '$http', function($scope, $http) {
     $scope.movies = [];
+    $scope.editing = false;
 
     $scope.getAll = function() {
       $http.get('/api/movies').then(
@@ -18,6 +19,7 @@ module.exports = function(app) {
       $http.post('/api/movies', newMovie).then(
         function(res) {
           $scope.movies.push(res.data);
+          $scope.newMovie = {};
         },
         function(res) {
           console.log(res);
@@ -26,7 +28,7 @@ module.exports = function(app) {
     };
 
     $scope.remove = function(movie) {
-      $http.delete('/api/movies' + movie._id).then(
+      $http.delete('/api/movies/' + movie._id).then(
         function(res) {
           $scope.getAll();
         },
@@ -35,5 +37,34 @@ module.exports = function(app) {
         }
       );
     };
+
+    $scope.edit = function(movie) {
+      $scope.movies.splice($scope.movies.indexOf(movie), 1)
+      $scope.editing = true;
+
+    //  $scope.tempMovie = Object.create(Object, movie); //this doesn't quite work yet
+      $scope.newMovie = movie;
+    };
+
+    $scope.cancelEdit = function() {
+      $scope.editing = false;
+      $scope.newMovie = {};
+      $scope.movies.push($scope.tempMovie);
+    };
+
+    $scope.submitEdit = function(movie) {
+      $scope.editing = false;
+      $scope.movies.push(movie);
+      $scope.newMovie = {};
+      $http.put('/api/movies/' + movie._id, movie).then(
+        function(res) {
+          console.log('movie changed');
+        },
+        function(res) {
+          console.log(res);
+        }
+      )
+    };
+
   }]);
 };

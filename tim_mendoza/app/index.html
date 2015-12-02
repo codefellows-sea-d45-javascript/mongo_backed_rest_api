@@ -21,13 +21,16 @@
         <label for="movieActors">Actors:</label>
         <input type="text" name="movieActors" data-ng-model="newMovie.actors">
 
-        <button type="submit">Create New Movie</button>
+        <button type="submit" data-ng-if="!editing">Create New Movie</button>
+        <button type="button" data-ng-if="editing" data-ng-click="submitEdit(newMovie)">Submit Edit</button>
+        <button type="button" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
       </form>
 
       <ul>
         <li data-ng-repeat="movie in movies">
           {{movie.title}}
-          <button type="button" data-ng-click="remove(movie)">Delete Movie</button>
+          <button type="button" data-ng-if="!editing" data-ng-click="edit(movie)">Edit Movie</button>
+          <button type="button" data-ng-if="!editing" data-ng-click="remove(movie)">Delete Movie</button>
         </li>
 
       </ul>

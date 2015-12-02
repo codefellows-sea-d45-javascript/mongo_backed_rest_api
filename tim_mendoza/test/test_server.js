@@ -102,7 +102,7 @@ describe('the movie router', function() {
     });
     it('should be able to update an existing movie', function(done) {
       chai.request('localhost:3000')
-      .put('/api/movies' + this.movie._id)
+      .put('/api/movies/' + this.movie._id)
       .send({actors: 'Bob Smith'})
       .end(function(err, res) {
         expect(err).to.eql(null);
@@ -113,7 +113,7 @@ describe('the movie router', function() {
     });
     it('should be able to delete a movie', function(done) {
       chai.request('localhost:3000')
-      .delete('/api/movies' + this.movie._id)
+      .delete('/api/movies/' + this.movie._id)
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.status).to.eql(200);

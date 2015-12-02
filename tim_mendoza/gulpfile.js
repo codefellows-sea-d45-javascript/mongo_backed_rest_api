@@ -34,4 +34,4 @@ gulp.task('uglify:dev', function() {
 gulp.task('build:dev', ['static:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);
 
-gulp.watch(['**/*', '!build/*'], ['default']);
+gulp.watch(['**/*', '!build/*', '!db/*'], ['default']);

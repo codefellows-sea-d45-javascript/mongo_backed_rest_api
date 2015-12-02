@@ -23,7 +23,7 @@ moviesRouter.post('/movies', bodyParser.json(), function(req, res) {
   });
 });
 
-moviesRouter.put('/movies:id', bodyParser.json(), function(req, res) {
+moviesRouter.put('/movies/:id', bodyParser.json(), function(req, res) {
   var movieData = req.body;
   delete movieData._id;
   Movie.update({_id: req.params.id}, movieData, function(err, data) {
@@ -32,7 +32,7 @@ moviesRouter.put('/movies:id', bodyParser.json(), function(req, res) {
   });
 });
 
-moviesRouter.delete('/movies:id', bodyParser.json(), function(req, res) {
+moviesRouter.delete('/movies/:id', bodyParser.json(), function(req, res) {
   Movie.remove({_id: req.params.id}, function(err, data) {
     if (err) return handleError(err, res);
     res.send('delete successful');
