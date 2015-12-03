@@ -1,8 +1,5 @@
 var gulp = require('gulp');
 var webpack = require('webpack-stream');
-var uglify = require('gulp-uglify');
-var minify = require('gulp-minify');
-
 
 gulp.task('static:dev', function() {
   gulp.src('app/**/*.html')
@@ -19,19 +16,17 @@ gulp.task('webpack:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('minify:dev', function() {
-  gulp.src('build/bundle.js')
-  .pipe(minify())
-  .pipe(gulp.dest('build/'));
-});
-
-gulp.task('uglify:dev', function() {
-  gulp.src('build/bundle.js')
-  .pipe(uglify())
-  .pipe(gulp.dest('build/'));
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'test_bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('test/client/'));
 });
 
 gulp.task('build:dev', ['static:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);
 
-gulp.watch(['**/*', '!build/*', '!db/*'], ['default']);
+//gulp.watch(['**/*', '!build/*', '!db/*'], ['default']);
