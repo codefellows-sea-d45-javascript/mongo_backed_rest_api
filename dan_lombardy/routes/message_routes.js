@@ -85,7 +85,7 @@ messagesRouter.put('/messages/:id', bodyParser.json(), function(req, res){
   });
 });
 
-messagesRouter.delete('/bears/:id', function(req, res){
+messagesRouter.delete('/messages/:id', function(req, res){
   Message.remove({_id: req.params.id}, function(err){
     if(err) return errorHandler(err, res);
 

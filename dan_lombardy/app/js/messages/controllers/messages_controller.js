@@ -20,6 +20,7 @@ module.exports = function(app){
       .then(function(res){
         $scope.messages.push(res.data);
         $scope.newMessage = Object.create(defaults);
+        console.log("Message created");
       }, function(err){
         console.log(err.data)
       });

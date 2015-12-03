@@ -33,8 +33,11 @@
         <form name="messageForm{{message._id}}" data-ng-submit="update(message)" data-ng-if="message.editing">
           <h2>Modify Message </h2>
 
-          <label for="messageSecreteToRead{{message.secretToRead}}"> Secret To Read:</label>
-          <input type="text" id="messageSecreteToRead{{message.secretToRead}}" required data-ng-model="message.secretToRead">
+          <label for="messageOneWordTitle{message.oneWordTitle}}"> One Word Title:</label>
+          <input type="text" id="messageOneWordTitle{{message.oneWordTitle}}" required data-ng-model="message.oneWordTitle">
+
+          <label for="messageSecretToRead{{message.secretToRead}}"> Secret To Read:</label>
+          <input type="text" id="messageSecretToRead{{message.secretToRead}}" required data-ng-model="message.secretToRead">
 
           <label for="messagePriority{{message.priority}"> Priority:</label>
           <input type="text" id="messagePriority{{message.priority}" required data-ng-model="message.priority">
