@@ -10,14 +10,9 @@ var messagesRouter = module.exports = exports = express.Router();
 
 messagesRouter.get('/messages', function(req, res){
   Message.find({}, function(err, data){
-    errorHandler(err, res);
-    var titles =[];
-    for(var i = 0; i < data.length; i++)
-    {
-      titles[i] = data[i]["oneWordTitle"];
-    }
-    console.log(titles);
-    res.json(titles);
+    if (err) return errorHandler(err, res);
+
+    res.json(data);
   });
 
 });
@@ -44,7 +39,7 @@ messagesRouter.get('/messages/*', function(req, res){
       data[0].views = data[0].views +1;
 
       Message.remove({oneWordTitle: title}, function(err){
-        errorHandler(err, res);
+        if (err) return errorHandler(err, res);
 
         console.log("Message was deleted from database.");
         data.destructMessage = "BOOM! Your message self-destructed!";
@@ -72,10 +67,28 @@ messagesRouter.get('/messages/*', function(req, res){
 
 messagesRouter.post('/messages', bodyParser.json(), function(req, res){
   var newMessage = new Message(req.body);
-  console.log("made it this far");
+  console.log("Message posted");
   newMessage.save(function(err, data){
-    errorHandler(err, res);
+    if (err) return errorHandler(err, res);
 
-    res.json({msg: "It posted successfully!"});
+    res.json(data);
+  });
+});
+
+messagesRouter.put('/messages/:id', bodyParser.json(), function(req, res){
+  var messageData = req.body;
+  delete messageData._id;
+  Message.update({_id: req.params.id}, messageData, function(err){
+    if (err) return errorHandler(err, res);
+
+    res.json({msg: "Updated successfully"});
+  });
+});
+
+messagesRouter.delete('/bears/:id', function(req, res){
+  Message.remove({_id: req.params.id}, function(err){
+    if(err) return errorHandler(err, res);
+
+    res.json({msg: "deleted successfully"});
   });
 });
