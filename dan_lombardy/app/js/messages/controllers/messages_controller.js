@@ -4,6 +4,7 @@ module.exports = function(app){
     $scope.errors = [];
     var defaults = {views: 0, destructMessage: "You only get to read this 3 times!" };
     $scope.newMessage = Object.create(defaults);
+    saveMsg = {};
 
 
     $scope.getAll = function(){
@@ -35,6 +36,22 @@ module.exports = function(app){
         $scope.errors.push("Could not edit "+ message.oneWordTitle);
         console.log(err.data);
       });
+    };
+
+    $scope.editMsg = function(message){
+      saveMsg.oneWordTitle = message.oneWordTitle;
+      saveMsg.secretToRead = message.secretToRead;
+      saveMsg.priority = saveMsg.priority;
+
+      message.editing = true;
+    };
+
+    $scope.cancelEdit = function(message){
+      message.editing = false;
+      message.oneWordTitle = saveMsg.oneWordTitle;
+      message.secretToRead = saveMsg.secretToRead;
+      message.priority = saveMsg.priority;
+
     };
 
     $scope.remove = function(message){

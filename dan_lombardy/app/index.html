@@ -43,10 +43,10 @@
           <input type="text" id="messagePriority{{message.priority}" required data-ng-model="message.priority">
 
           <button type ="submit"> Edit Message</button>
-          <button data-ng-click="message.editing = false"> Cancel Editing</button>
+          <button data-ng-click="cancelEdit(message)"> Cancel Editing</button>
         </form>
 
-        <button data-ng-if="!message.editing" data-ng-click="message.editing = true"> Edit Message</button>
+        <button data-ng-if="!message.editing" data-ng-click="editMsg(message)"> Edit Message</button>
         <button data-ng-if="!message.editing" data-ng-click="remove(message)"> Delete Message</button>
     </li>
     </ul>
