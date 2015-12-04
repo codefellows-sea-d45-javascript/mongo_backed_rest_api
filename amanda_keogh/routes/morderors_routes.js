@@ -13,6 +13,14 @@ morderorRouter.get('/morderors', function(req, res) {
   console.log('get!');
 });
 
+morderorRouter.get('/morderors/:name', function(req, res) {
+  Morderor.find({name: req.params.name}, function(err, data) {
+    if (err) return res.status(500).json({msg: 'ERROR!!'});
+    res.json(data);
+  });
+  console.log('got!')
+})
+
 morderorRouter.post('/morderors', bodyParser.json(), function(req, res) {
   var newMorderor = new Morderor(req.body);
   newMorderor.save(function(err, data) {
@@ -37,12 +45,4 @@ morderorRouter.delete('/morderors/:name', function(req, res) {
     res.json({msg: 'morderor mordered!'});
   });
   console.log('delete!');
-});
-
-// Find "morders" value of name, delete that morderor
-morderorRouter.all('/mordermatch/:name', function() {
-  Morderor.find({name: req.params.name}, function(err, data) {
-    res.json(data);
-  });
-  res.json({msg: "MORDERED!"});
 });
