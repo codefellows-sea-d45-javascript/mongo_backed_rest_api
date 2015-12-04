@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var Book = require(__dirname + '/../models/book');
+var Book = require(__dirname + '/../models/books');
 var handleError = require(__dirname + '/../lib/handleServerError');
 
 var booksRouter = module.exports = exports = express.Router();
