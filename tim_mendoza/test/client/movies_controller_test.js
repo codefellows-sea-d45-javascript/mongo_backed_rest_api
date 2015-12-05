@@ -38,5 +38,15 @@ describe('the movies controller', function() {
       $httpBackend.flush();
       expect($scope.movies[0].title).toBe('thing');
     });
+
+    it('should be able to create a new movie', function() {
+      $httpBackend.expectPOST('/api/movies', {title: 'testmovie'}).respond(200, {name: 'a different movie'});
+      expect($scope.movies.length).toBe(0);
+      expect($scope.newMovie).toBe({}); //this will need to be changed with defaults, if any. Set to null? Yes
+      $scope.newMovie.title = 'testmovie';
+      $scope.create($scope.newMovie);
+      $httpBackend.flush();
+
+    });
   });
 });
