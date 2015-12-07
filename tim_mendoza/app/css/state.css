@@ -1,0 +1,4 @@
+.btn:disabled {
+  color: #ccc;
+  background-color: #aaa;
+}
