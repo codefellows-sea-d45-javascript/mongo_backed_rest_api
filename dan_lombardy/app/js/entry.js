@@ -1,7 +1,5 @@
 require('angular/angular');
 var angular = window.angular;
 
-var selfDestructApp = angular.module('destuctDescribe', []);
-selfDestructApp.controller("DescriptionController", ['$scope', function($scope){
-  $scope.nifty = "I'm Nifty!";
-}]);
+var selfDestructApp = angular.module('SelfDestructApp', []);
+require('./messages/messages')(selfDestructApp);
