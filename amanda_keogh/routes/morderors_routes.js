@@ -13,13 +13,13 @@ morderorRouter.get('/morderors', function(req, res) {
   console.log('get!');
 });
 
-morderorRouter.get('/morderors/:name', function(req, res) {
-  Morderor.find({name: req.params.name}, function(err, data) {
+morderorRouter.get('/morderors/:id', function(req, res) {
+  Morderor.find({_id: req.params.id}, function(err, data) {
     if (err) return res.status(500).json({msg: 'ERROR!!'});
     res.json(data);
   });
-  console.log('got!')
-})
+  console.log('got!');
+});
 
 morderorRouter.post('/morderors', bodyParser.json(), function(req, res) {
   var newMorderor = new Morderor(req.body);
@@ -30,17 +30,17 @@ morderorRouter.post('/morderors', bodyParser.json(), function(req, res) {
   console.log('post!');
 });
 
-morderorRouter.put('/morderors/:name', bodyParser.json(), function(req, res) {
+morderorRouter.put('/morderors/:id', bodyParser.json(), function(req, res) {
   var data = req.body;
-  Morderor.update({name: req.params.name}, data, function(err) {
+  Morderor.update({_id: req.params.id}, data, function(err) {
     if (err) return res.status(500).json({msg: 'ERROR!!'});
     res.json({msg: 'morderor updated!'});
   });
   console.log('put!');
 });
 
-morderorRouter.delete('/morderors/:name', function(req, res) {
-  Morderor.remove({name: req.params.name}, function(err) {
+morderorRouter.delete('/morderors/:id', function(req, res) {
+  Morderor.remove({_id: req.params.id}, function(err) {
     if (err) return res.status(500).json({msg: 'ERROR!!'});
     res.json({msg: 'morderor mordered!'});
   });
