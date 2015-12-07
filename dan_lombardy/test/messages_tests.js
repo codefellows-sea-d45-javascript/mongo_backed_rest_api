@@ -65,64 +65,63 @@ describe('message routes gets', function(){
         done();
       });
     });
-
 });
 
 describe('message deletes after 3 gets', function(){
-    var tokenSave = "";
+  var tokenSave = "";
 
-    after(function(done){
-      mongoose.connection.db.dropDatabase(function(){
-        done();
-      });
+  after(function(done){
+    mongoose.connection.db.dropDatabase(function(){
+      done();
     });
+  });
 
-    before(function(done){
-      var messageData = {"username": "Tester", "password":"foobar123"};
-      chai.request('localhost:3000')
-      .post('/api/signup')
-      .send(messageData)
-      .end(function(err, res){
-        tokenSave = res.body.token;
-       done();
-     }.bind(this));
+  before(function(done){
+    var messageData = {"username": "Tester", "password":"foobar123"};
+    chai.request('localhost:3000')
+    .post('/api/signup')
+    .send(messageData)
+    .end(function(err, res){
+      tokenSave = res.body.token;
+     done();
+    }.bind(this));
+  });
+
+  before(function(done){
+    (new Message({"oneWordTitle": "testMsg", "secretToRead":"Run away!", "priority":5, "views":0, "destructMessage":"default message"}))
+    .save(function(err, data){
+     expect(err).to.eql(null);
+     this.message = data;
+     done();
+  }.bind(this));
+  });
+
+  before(function(done){
+    chai.request('localhost:3000')
+    .get('/api/messages/' + 'testMsg')
+    .send({"token": tokenSave})
+    .end(function(err, res){
+      done();
+    }.bind(this));
+  });
+
+  before(function(done){
+    chai.request('localhost:3000')
+    .get('/api/messages/' + 'testMsg')
+    .send({"token": tokenSave})
+    .end(function(err, res){
+      done();
+    }.bind(this));
+  });
+
+  it('get initial message', function(done){
+    chai.request('localhost:3000')
+    .get('/api/messages/' + 'testMsg')
+    .send({"token": tokenSave})
+    .end(function(err, res){
+      expect(err).to.eql(null);
+      expect(res.body.destructMessage).to.equal("BOOM! Your message self-destructed!");
+      done();
     });
-
-      before(function(done){
-        (new Message({"oneWordTitle": "testMsg", "secretToRead":"Run away!", "priority":5, "views":0, "destructMessage":"default message"}))
-        .save(function(err, data){
-         expect(err).to.eql(null);
-         this.message = data;
-         done();
-      }.bind(this));
-    });
-
-    before(function(done){
-      chai.request('localhost:3000')
-      .get('/api/messages/' + 'testMsg')
-      .send({"token": tokenSave})
-      .end(function(err, res){
-        done();
-      }.bind(this));
-    });
-
-    before(function(done){
-      chai.request('localhost:3000')
-      .get('/api/messages/' + 'testMsg')
-      .send({"token": tokenSave})
-      .end(function(err, res){
-        done();
-      }.bind(this));
-    });
-
-      it('get initial message', function(done){
-        chai.request('localhost:3000')
-        .get('/api/messages/' + 'testMsg')
-        .send({"token": tokenSave})
-        .end(function(err, res){
-          expect(err).to.eql(null);
-          expect(res.body.destructMessage).to.equal("BOOM! Your message self-destructed!");
-          done();
-        });
-      });
+  });
 });
