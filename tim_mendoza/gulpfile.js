@@ -29,7 +29,7 @@ gulp.task('css:dev', function() {
     'app/css/state.css'
   ])
   .pipe(cssConcat('styles.min.css'))
-  //.pipe(cssMinify())
+  .pipe(cssMinify())
   .pipe(gulp.dest('build/'));
 });
 
