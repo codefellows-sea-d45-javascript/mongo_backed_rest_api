@@ -35,6 +35,7 @@ module.exports = function(app) {
   };
 
   $scope.update = function(morderor) {
+    morderor.editing = false;
     $http.put('/api/morderors/' + morderor._id, morderor)
       .then(function(res){
         console.log('morderor updated.');
