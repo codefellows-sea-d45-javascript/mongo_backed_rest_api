@@ -55,5 +55,9 @@ describe('messages controller', function(){
       expect($scope.messages[0].oneWordTitle).toBe("testMessage2");
       expect($scope.newMessage).toEqual($scope.defaults);
     });
+
+    it('should update a message with update', function(){
+      
+    })
   });
 });
