@@ -19,7 +19,7 @@ module.exports = function(app) {
       $http.post('/api/movies', newMovie).then(
         function(res) {
           $scope.movies.push(res.data);
-          $scope.newMovie = {};
+          $scope.newMovie = null;
         },
         function(res) {
           console.log(res);
@@ -30,7 +30,7 @@ module.exports = function(app) {
     $scope.remove = function(movie) {
       $http.delete('/api/movies/' + movie._id).then(
         function(res) {
-          $scope.getAll();
+          $scope.movies.splice($scope.movies.indexOf(movie), 1);
         },
         function(res) {
           console.log(res);

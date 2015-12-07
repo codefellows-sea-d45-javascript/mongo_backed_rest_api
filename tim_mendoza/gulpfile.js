@@ -29,4 +29,4 @@ gulp.task('webpack:test', function() {
 gulp.task('build:dev', ['static:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);
 
-//gulp.watch(['**/*', '!build/*', '!db/*'], ['default']);
+gulp.watch(['test/client/movies_controller_test.js'], ['webpack:test']);

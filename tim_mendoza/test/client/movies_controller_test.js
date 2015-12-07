@@ -13,14 +13,14 @@ describe('the movies controller', function() {
     $ControllerConstructor = $controller;
   }));
 
-  it('should be able to creat a controller', function() {
+  it('should be able to create a controller', function() {
     var controller = $ControllerConstructor('MoviesController', {$scope: $scope});
     expect(typeof $scope).toBe('object');
     expect(typeof controller).toBe('object');
     expect(Array.isArray($scope.movies)).toBe(true);
   });
 
-  describe('REST request function', function() {
+  describe('REST request functions', function() {
     beforeEach(angular.mock.inject(function(_$httpBackend_, $rootScope) {
       $httpBackend = _$httpBackend_;
       $scope = $rootScope.$new();
@@ -40,13 +40,26 @@ describe('the movies controller', function() {
     });
 
     it('should be able to create a new movie', function() {
-      $httpBackend.expectPOST('/api/movies', {title: 'testmovie'}).respond(200, {name: 'a different movie'});
+      $httpBackend.expectPOST('/api/movies', {title: 'testmovie'}).respond(200, {title: 'a different movie'});
       expect($scope.movies.length).toBe(0);
-      expect($scope.newMovie).toBe({}); //this will need to be changed with defaults, if any. Set to null? Yes
-      $scope.newMovie.title = 'testmovie';
+      expect($scope.newMovie).toBe(undefined); //this will need to be changed with defaults, if any. Set to null? Yes
+      $scope.newMovie = {title: 'testmovie'};
       $scope.create($scope.newMovie);
       $httpBackend.flush();
+      expect($scope.newMovie).toBe(null);
+      expect($scope.movies[0].title).toBe('a different movie');
+    });
 
+    it('should be able to delete a movie', function() {
+      $httpBackend.expectDELETE('/api/movies/12345').respond(200, 'ok');
+      $scope.movies[0] = {
+        _id: 12345,
+        title: 'test'
+      };
+      $scope.movies[1] = {title: 'othermovie'};
+      $scope.remove($scope.movies[0]);
+      $httpBackend.flush();
+      expect($scope.movies[0].title).toBe('othermovie');
     });
   });
 });
