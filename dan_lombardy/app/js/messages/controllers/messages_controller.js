@@ -2,8 +2,8 @@ module.exports = function(app){
   app.controller("MessagesController", ['$scope', "$http", function($scope, $http){
     $scope.messages = [];
     $scope.errors = [];
-    var defaults = {views: 0, destructMessage: "You only get to read this 3 times!" };
-    $scope.newMessage = Object.create(defaults);
+    $scope.defaults = {views: 0, destructMessage: "You only get to read this 3 times!" };
+    $scope.newMessage = angular.copy($scope.defaults);
     saveMsg = {};
 
 
@@ -20,7 +20,7 @@ module.exports = function(app){
       $http.post('/api/messages', message)
       .then(function(res){
         $scope.messages.push(res.data);
-        $scope.newMessage = Object.create(defaults);
+        $scope.newMessage = angular.copy($scope.defaults);
         console.log("Message created");
       }, function(err){
         console.log(err.data)

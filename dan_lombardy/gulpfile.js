@@ -47,6 +47,16 @@ gulp.task('jshint:app', function(){
   .pipe(jshint.reporter('default'));
 });
 
+gulp.task('webpack:test', function(){
+  return gulp.src('test/client/test_entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'test_bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('test/client/'));
+})
+
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('mocha', ['mocha:test']);
 gulp.task('build', ['webpack:dev', 'static:dev']);
