@@ -3,6 +3,8 @@ var webpack = require('webpack-stream');
 var uglify = require('gulp-uglify');
 var cssConcat = require('gulp-concat-css');
 var cssMinify = require('gulp-minify-css');
+var sass = require('gulp-sass');
+var sourceMaps = require('gulp-sourcemaps');
 
 
 gulp.task('static:dev', function() {
@@ -21,15 +23,11 @@ gulp.task('webpack:dev', function() {
 });
 
 gulp.task('css:dev', function() {
-  gulp.src([
-    'app/css/normalize.css',
-    'app/css/base.css',
-    'app/css/layout.css',
-    'app/css/module.css',
-    'app/css/state.css'
-  ])
-  .pipe(cssConcat('styles.min.css'))
+  gulp.src('./app/scss/application.scss')
+  .pipe(sourceMaps.init())
+  .pipe(sass().on('error', sass.logError))
   .pipe(cssMinify())
+  .pipe(sourceMaps.write('./'))
   .pipe(gulp.dest('build/'));
 });
 
@@ -42,5 +40,5 @@ gulp.task('uglify:dev', function() {
 gulp.task('build:dev', ['static:dev', 'webpack:dev', 'css:dev']);
 gulp.task('default', ['build:dev']);
 
-gulp.watch(['app/css/**/*.css'], ['css:dev']);
+gulp.watch(['app/scss/**/*.scss'], ['css:dev']);
 gulp.watch(['app/**/*.html'], ['static:dev']);
