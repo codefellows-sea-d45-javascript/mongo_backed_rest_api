@@ -10,6 +10,19 @@ var Felon = require(__dirname + '/../models/felons.js');
 
 
 describe('the felon routes', function() {
+
+  before(function(done) {
+    var testUser = {username: 'test', password: 'testing123'};
+    chai.request('localhost:3000')
+      .post('/signup')
+      .send(testUser)
+      .end(function(err, res) {
+        this.token = JSON.parse(res.text).token;
+        expect(err).to.eql(null);
+        done();
+    }.bind(this));
+  });
+
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
       done();
@@ -17,7 +30,7 @@ describe('the felon routes', function() {
   });
 
   it('should be able to create felons', function() {
-    var testFelon = {name: 'odd job', crime: 'bank robber'};
+    var testFelon = {name: 'odd job', crime: 'bank robber', token: this.token};
     chai.request('localhost:3000')
       .post('/felons')
       .send(testFelon)
@@ -50,7 +63,7 @@ describe('the felon routes', function() {
     it('should update a felon', function(done) {
       chai.request('localhost:3000')
         .put('/felons')
-        .send({name: 'dexter'})
+        .send({name: 'dexter', token: this.token})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.text).to.eql('updated!');
@@ -61,6 +74,7 @@ describe('the felon routes', function() {
     it('should delete a felon', function(done) {
       chai.request('localhost:3000')
         .delete(/felons/ + this.felon._id)
+        .send({token: this.token})
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.text).to.eql('deleted!');

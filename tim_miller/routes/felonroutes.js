@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Felon = require(__dirname + '/../models/felons');
 var error = require(__dirname + '/../lib/errorHandler.js');
+var eatAuth = require(__dirname + '/../lib/eat_auth.js');
 
 var felonRouter = module.exports = exports = express.Router();
 
@@ -14,7 +15,7 @@ felonRouter.get('/felons', function(req, res) {
   });
 });
 
-felonRouter.post('/felons', bodyParser.json(), function(req, res) {
+felonRouter.post('/felons', bodyParser.json(), eatAuth, function(req, res) {
   var newFelon = new Felon(req.body);
 
   newFelon.save(function(err, data) {
@@ -24,7 +25,7 @@ felonRouter.post('/felons', bodyParser.json(), function(req, res) {
   });
 });
 
-felonRouter.put('/felons', bodyParser.json(), function(req, res) {
+felonRouter.put('/felons', bodyParser.json(), eatAuth, function(req, res) {
 
   var felonData = req.body;
   delete req.body._id;
@@ -35,7 +36,7 @@ felonRouter.put('/felons', bodyParser.json(), function(req, res) {
   });
 });
 
-felonRouter.delete('/felons/:id', function(req, res) {
+felonRouter.delete('/felons/:id', bodyParser.json(), eatAuth, function(req, res) {
 
   Felon.remove({_id: req.params._id}, function(err) {
     if(err) return error.default(err, res);
