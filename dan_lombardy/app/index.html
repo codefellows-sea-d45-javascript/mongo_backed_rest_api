@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Self Destruct Messenger</title>
+</head>
+<body data-ng-app="SelfDestructApp">
+  <h1>Self Destruct Messenger</h1>
+  <h2>The following messages are available:</h2>
+  <main data-ng-controller="MessagesController" data-ng-init="getAll()">
+    <ul id='errorslist'>
+      <li data-ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+
+    <form name="newMessageForm" data-ng-submit="create(newMessage)">
+      <h2>New Message:</h2>
+
+      <label for="newMessageOneWordTitle">One Word Title</label>
+      <input type='text' id="newMessageOneWordTitle" required data-ng-model="newMessage.oneWordTitle">
+
+      <label for="newMessageSecretToRead">Secret To Read</label>
+      <input type='text' id="newMessageSecretToRead" required data-ng-model="newMessage.secretToRead">
+
+      <label for="newMessagePriority">Priority:</label>
+      <input type='text' id="newMessagePriority" required data-ng-model="newMessage.priority">
+
+      <button type="submit" data-ng-disabled="newMessageForm.$invalid">Create New Message</button>
+    </form>
+
+    <ul id="messageList">
+      <li data-ng-repeat="message in messages">{{message.oneWordTitle}}
+        <form name="messageForm{{message._id}}" data-ng-submit="update(message)" data-ng-if="message.editing">
+          <h2>Modify Message </h2>
+
+          <label for="messageOneWordTitle{message.oneWordTitle}}"> One Word Title:</label>
+          <input type="text" id="messageOneWordTitle{{message.oneWordTitle}}" required data-ng-model="message.oneWordTitle">
+
+          <label for="messageSecretToRead{{message.secretToRead}}"> Secret To Read:</label>
+          <input type="text" id="messageSecretToRead{{message.secretToRead}}" required data-ng-model="message.secretToRead">
+
+          <label for="messagePriority{{message.priority}"> Priority:</label>
+          <input type="text" id="messagePriority{{message.priority}" required data-ng-model="message.priority">
+
+          <button type ="submit"> Edit Message</button>
+          <button data-ng-click="cancelEdit(message)"> Cancel Editing</button>
+        </form>
+
+        <button data-ng-if="!message.editing" data-ng-click="editMsg(message)"> Edit Message</button>
+        <button data-ng-if="!message.editing" data-ng-click="remove(message)"> Delete Message</button>
+    </li>
+    </ul>
+  </main>
+
+
+
+
+  <script src="/bundle.js"></script>
+</body>
+</html>

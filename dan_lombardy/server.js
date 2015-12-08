@@ -1,9 +1,12 @@
-var express = require('express');
 var mongoose = require('mongoose');
+var express = require('express');
 var app = express();
 var messagesRouter = require(__dirname + '/routes/message_routes');
+var fs = require('fs');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/self_destruct');
+
+app.use(express.static(__dirname + '/build'));
 
 app.use('/api', messagesRouter);
 
