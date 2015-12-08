@@ -1,0 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Roboto:400,700);
+
+body{
+  font-family: 'Noto Serif', serif;
+  padding: 10px;
+  font-size: 16px;
+  background-color: white;
+
+}
+
+h1, h2{
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{
+  color:red;
+}
+
+h2{
+  color: #007991;
+}
+
+a,
+a:link {
+  color: #439A86;
+}
+
+a:hover,
+a:focus{
+  color: #007991;
+}
