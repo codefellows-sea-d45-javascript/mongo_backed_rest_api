@@ -29,9 +29,9 @@ module.exports = function(app){
 
     $scope.update = function(message){
       message.editing = false;
-      $http.put('api/messages/' + message._id, message)
+      $http.put('/api/messages/' + message._id, message)
       .then(function(res){
-        console.log('Message has been updated')
+        console.log(res.data.msg);
       }, function(err){
         $scope.errors.push("Could not edit "+ message.oneWordTitle);
         console.log(err.data);
@@ -41,7 +41,7 @@ module.exports = function(app){
     $scope.editMsg = function(message){
       saveMsg.oneWordTitle = message.oneWordTitle;
       saveMsg.secretToRead = message.secretToRead;
-      saveMsg.priority = saveMsg.priority;
+      saveMsg.priority = message.priority;
 
       message.editing = true;
     };

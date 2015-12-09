@@ -1,7 +1,7 @@
 require(__dirname + '/../../app/js/entry');
 require('angular-mocks');
 
-describe('messages controller', function(){
+describe('$scope.newMessages controller', function(){
   var $httpBackend;
   var $ControllerConstructor;
   var $scope;
@@ -42,7 +42,6 @@ describe('messages controller', function(){
     it('should be able to create a message', function(){
       $httpBackend.expectPOST('/api/messages', {oneWordTitle: "testMessage1", secretToRead:"test1", priority: 1, "views":0, "destructMessage":"You only get to read this 3 times!"}).respond(200, {oneWordTitle: "testMessage2", secretToRead:"test2", priority: 1});
 
-
       expect($scope.messages.length).toBe(0);
       expect($scope.newMessage).toEqual($scope.defaults);
 
@@ -55,5 +54,51 @@ describe('messages controller', function(){
       expect($scope.messages[0].oneWordTitle).toBe("testMessage2");
       expect($scope.newMessage).toEqual($scope.defaults);
     });
+
+    it('should update a message', function(){
+      $httpBackend.expectPUT('/api/messages/1234', {"_id": 1234, oneWordTitle: "tester", secretToRead: "SHHH", priority:1, views:0, destructMessage: "You only get to read this 3 times!", editing: false }).respond(200, {msg: "Updated successfully"});
+
+      $scope.newMessage = {
+        _id: 1234,
+        oneWordTitle: "tester",
+        secretToRead: "SHHH",
+        priority:1,
+        "views":0,
+        "destructMessage": "You only get to read this 3 times!"
+      };
+
+      $scope.editMsg($scope.newMessage);
+
+      expect($scope.newMessage.editing).toBe(true);
+
+      $scope.update($scope.newMessage);
+      $httpBackend.flush();
+
+      expect($scope.newMessage.editing).toBe(false);
+    });
+
+    it('should remove a message', function(){
+      $httpBackend.expectDELETE('/api/messages/123').respond(200, {msg: "deleted successfully"});
+
+      var message = {
+        _id: 123,
+         oneWordTitle: "test4",
+         secretToRead: "SHHH",
+         priority:1,
+         "views":0,
+         "destructMessage": "You only get to read this 3 times!"
+      };
+
+      $scope.messages = [message];
+
+      expect($scope.messages.length).toBe(1);
+      $scope.remove(message);
+      $httpBackend.flush();
+
+      expect($scope.messages.length).toBe(0);
+    });
+
+
+
   });
 });
