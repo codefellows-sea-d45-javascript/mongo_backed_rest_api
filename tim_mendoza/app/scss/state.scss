@@ -3,5 +3,5 @@
 }
 
 .btn:disabled {
-  background-color: $button-disabled-color;
+  background: grayscale($button-color);
 }
