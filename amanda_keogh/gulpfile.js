@@ -5,9 +5,10 @@ var webpack = require('webpack-stream');
 
 var appFiles = ['server.js', __dirname + '/routes/**/*.js', __dirname + '/models/**/*.js', __dirname + '/lib/**/*.js'];
 var testFiles = ['gulpfile.js', __dirname + "/test/**/*.js"];
+var htmlFiles = ['app/**/*.html'];
 
 gulp.task('static:dev', function() {
-  return gulp.src('app/**/*.html')
+  return gulp.src(htmlFiles)
   .pipe(gulp.dest('build/'));
 });
 
@@ -53,6 +54,7 @@ gulp.task('mocha', function() {
 gulp.task('watch', function() {
   gulp.watch(appFiles, ['jshint:appfiles', 'mocha']);
   gulp.watch(testFiles, ['jshint:appfiles']);
+  gulp.watch(htmlFiles, ['build:dev']);
 })
 
 gulp.task('default', ['watch']);
