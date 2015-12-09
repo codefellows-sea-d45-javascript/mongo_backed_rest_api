@@ -7,10 +7,10 @@
     <title>Movies</title>
   </head>
   <body data-ng-app="MoviesApp">
-    <header class="offset-by-one column">
+    <header class="offset-by-1">
       <h1>Movies!</h1>
     </header>
-    <main class="eight columns offset-by-two" data-ng-controller="MoviesController" data-ng-init="getAll()">
+    <main class="width-8-columns offset-by-2" data-ng-controller="MoviesController" data-ng-init="getAll()">
 
       <form name="newMovieForm" class="card movie" data-ng-submit="create(newMovie)">
         <label for="movieTitle">Title:</label>

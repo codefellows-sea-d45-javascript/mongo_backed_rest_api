@@ -19,6 +19,7 @@ gulp.task('webpack:dev', function() {
       filename: 'bundle.js'
     }
   }))
+  .pipe(uglify())
   .pipe(gulp.dest('build/'));
 });
 

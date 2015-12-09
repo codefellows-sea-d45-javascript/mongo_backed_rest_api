@@ -1,3 +1,7 @@
+.btn:hover {
+  background: lighten($button-color, 5%);
+}
+
 .btn:disabled {
   background-color: $button-disabled-color;
 }
