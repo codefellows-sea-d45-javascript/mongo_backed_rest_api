@@ -2,10 +2,11 @@
 
 body{
   font-family: 'Noto Serif', serif;
-  padding: 10px;
   font-size: 16px;
-  background-color: white;
-
+  background-color: #FFFDF7;
+  margin: 0 auto;
+  max-width: 1350px;
+  min-width: 303px;
 }
 
 h1, h2{
@@ -13,19 +14,24 @@ h1, h2{
 }
 
 h1{
-  color:red;
+  color:#FFFDF7;
+  width: 20%;
 }
 
 h2{
-  color: #007991;
+  color: #313442;
 }
 
 a,
 a:link {
-  color: #439A86;
+  color: #4F5D75;
 }
 
 a:hover,
 a:focus{
-  color: #007991;
+  color: #EF8354;
+}
+
+header{
+  background-color: #EF8354;
 }

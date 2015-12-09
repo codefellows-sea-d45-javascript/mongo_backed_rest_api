@@ -1,0 +1,19 @@
+.l-flex{
+  display: flex;
+  justify-content: space-around;
+  width: 100%
+}
+
+@media all and (min-width: 800px){
+  .l-flex{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.l-message-container{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width:100%;
+}

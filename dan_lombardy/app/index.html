@@ -2,55 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+
   <title>Self Destruct Messenger</title>
   <link rel="stylesheet" href="styles.min.css">
 </head>
 <body data-ng-app="SelfDestructApp">
-  <h1>Self Destruct Messenger</h1>
-  <h2>The following messages are available:</h2>
-  <main data-ng-controller="MessagesController" data-ng-init="getAll()">
-    <ul id='errorslist'>
+  <header class="l-flex">
+      <h1 class="in-header">Self Destruct Messenger</h1>
+      <div class="in-header logo"></div>
+
+  </header>
+
+  <main data-ng-controller="MessagesController" data-ng-init="getAll()" class="l-message-container">
+    <ul id='errorslist' class="in-message-container">
       <li data-ng-repeat="error in errors">{{error}}</li>
     </ul>
 
 
-    <form name="newMessageForm" data-ng-submit="create(newMessage)">
-      <h2>New Message:</h2>
+    <section class="in-message-container" >
+      <h2>Available Messages:</h2>
+      <ul id="messageList" >
+        <li data-ng-repeat="message in messages">{{message.oneWordTitle}}
+          <form name="messageForm{{message._id}}" data-ng-submit="update(message)" data-ng-if="message.editing">
+            <h2>Modify Message </h2>
 
-      <label for="newMessageOneWordTitle">One Word Title</label>
-      <input type='text' id="newMessageOneWordTitle" required data-ng-model="newMessage.oneWordTitle">
+            <label for="messageOneWordTitle{message.oneWordTitle}}"> One Word Title:</label>
+            <input type="text" id="messageOneWordTitle{{message.oneWordTitle}}" required data-ng-model="message.oneWordTitle">
 
-      <label for="newMessageSecretToRead">Secret To Read</label>
-      <input type='text' id="newMessageSecretToRead" required data-ng-model="newMessage.secretToRead">
+            <label for="messageSecretToRead{{message.secretToRead}}"> Secret To Read:</label>
+            <input type="text" id="messageSecretToRead{{message.secretToRead}}" required data-ng-model="message.secretToRead">
 
-      <label for="newMessagePriority">Priority:</label>
-      <input type='text' id="newMessagePriority" required data-ng-model="newMessage.priority">
+            <label for="messagePriority{{message.priority}"> Priority:</label>
+            <input type="text" id="messagePriority{{message.priority}" required data-ng-model="message.priority">
 
-      <button type="submit" data-ng-disabled="newMessageForm.$invalid">Create New Message</button>
-    </form>
+            <button type ="submit"> Edit Message</button>
+            <button data-ng-click="cancelEdit(message)"> Cancel Editing</button>
+          </form>
 
-    <ul id="messageList">
-      <li data-ng-repeat="message in messages">{{message.oneWordTitle}}
-        <form name="messageForm{{message._id}}" data-ng-submit="update(message)" data-ng-if="message.editing">
-          <h2>Modify Message </h2>
+          <button data-ng-if="!message.editing" data-ng-click="editMsg(message)"> Edit Message</button>
+          <button data-ng-if="!message.editing" data-ng-click="remove(message)"> Delete Message</button>
+        </li>
+      </ul>
+    </section>
 
-          <label for="messageOneWordTitle{message.oneWordTitle}}"> One Word Title:</label>
-          <input type="text" id="messageOneWordTitle{{message.oneWordTitle}}" required data-ng-model="message.oneWordTitle">
+    <section class="in-message-container">
+      <form name="newMessageForm" data-ng-submit="create(newMessage)">
+        <h2>New Message:</h2>
 
-          <label for="messageSecretToRead{{message.secretToRead}}"> Secret To Read:</label>
-          <input type="text" id="messageSecretToRead{{message.secretToRead}}" required data-ng-model="message.secretToRead">
+        <label for="newMessageOneWordTitle">One Word Title</label>
+        <input type='text' id="newMessageOneWordTitle" required data-ng-model="newMessage.oneWordTitle">
 
-          <label for="messagePriority{{message.priority}"> Priority:</label>
-          <input type="text" id="messagePriority{{message.priority}" required data-ng-model="message.priority">
+        <label for="newMessageSecretToRead">Secret To Read</label>
+        <input type='text' id="newMessageSecretToRead" required data-ng-model="newMessage.secretToRead">
 
-          <button type ="submit"> Edit Message</button>
-          <button data-ng-click="cancelEdit(message)"> Cancel Editing</button>
-        </form>
+        <label for="newMessagePriority">Priority:</label>
+        <input type='text' id="newMessagePriority" required data-ng-model="newMessage.priority">
 
-        <button data-ng-if="!message.editing" data-ng-click="editMsg(message)"> Edit Message</button>
-        <button data-ng-if="!message.editing" data-ng-click="remove(message)"> Delete Message</button>
-    </li>
-    </ul>
+        <button type="submit" data-ng-disabled="newMessageForm.$invalid">Create New Message</button>
+      </form>
+    </section>
   </main>
 
 

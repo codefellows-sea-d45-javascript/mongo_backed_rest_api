@@ -73,9 +73,11 @@ gulp.task('css:dev', function(){
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css.watch', function(){
+gulp.task('css:watch', function(){
   gulp.watch('./app/css/**/*.css', ['css:dev']);
 });
+
+
 
 gulp.task('jshint', ['jshint:test', 'jshint:app']);
 gulp.task('mocha', ['mocha:test']);
