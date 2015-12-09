@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wow such website!</title>
+</head>
+<body data-ng-app="officersAndFelons">
+  <main data-ng-controller="OfficerController">
+    <h1>Bad Boys Bad Boys</h1>
+    <h2>{{greeting}}</h2>
+
+    <input type="text" data-ng-model="greeting">
+    <button data-ng-click="alertGreeting()">Salute!</button>
+  </main>
+  <script src="bundle.js"></script>
+</body>
+</html>

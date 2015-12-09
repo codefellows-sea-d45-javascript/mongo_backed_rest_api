@@ -2,3 +2,4 @@
 **/node_modules
 **/db
 **/tim_miller/db
+build/**
