@@ -62,32 +62,18 @@ gulp.task('webpack:test', function(){
   .pipe(gulp.dest('test/client/'));
 });
 
-// gulp.task('css:dev', function(){
-//   return gulp.src([
-//     'app/css/normalize.css',
-//     'app/css/base.css',
-//     'app/css/layout.css',
-//     'app/css/module.css',
-//     'app/css/state.css',
-//     'app/css/theme.css'])
-//   .pipe(concatCss('styles.min.css'))
-//   .pipe(minifyCss())
-//   .pipe(gulp.dest('build/'));
-// });
-
 gulp.task('sass:dev', function () {
- gulp.src('./app/sass/**/*.scss')
+ gulp.src('./app/sass/sassEntry.scss')
   .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
-  .pipe(sourcemaps.write())
-  .pipe(concatCss('styles.min.css'))
   .pipe(minifyCss())
+  .pipe(sourcemaps.write("./"))
   .pipe(gulp.dest('build/'));
 });
 
 
-gulp.task('css:watch', function(){
-  gulp.watch('./app/css/**/*.css', ['css:dev']);
+gulp.task('sass:watch', function(){
+  gulp.watch('./app/sass/**/*.scss', ['sass:dev']);
 });
 
 

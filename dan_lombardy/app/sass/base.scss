@@ -1,9 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Roboto:400,700);
+$primary-color: #FFFDF7;
+$secondary-color: #EF8354;
+$tertiary-color:#313442;
+$quadriary-color: #4F5D75;
 
 body{
   font-family: 'Noto Serif', serif;
   font-size: 16px;
-  background-color: #FFFDF7;
+  background-color: $primary-color;
   margin: 0 auto;
   max-width: 1350px;
   min-width: 303px;
@@ -14,24 +18,24 @@ h1, h2{
 }
 
 h1{
-  color:#FFFDF7;
+  color: $primary-color;
   width: 20%;
 }
 
 h2{
-  color: #313442;
+  color: $tertiary-color;
 }
 
 a,
 a:link {
-  color: #4F5D75;
+  color: $quadriary-color;
 }
 
 a:hover,
 a:focus{
-  color: #EF8354;
+  color: $secondary-color;
 }
 
 header{
-  background-color: #EF8354;
+  background-color: $secondary-color;
 }
