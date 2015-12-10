@@ -1,13 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Roboto:400,700);
-$primary-color: #FFFDF7;
-$secondary-color: #EF8354;
-$tertiary-color:#313442;
-$quadriary-color: #4F5D75;
+@import 'color-set';
+@import "border-radius";
+
+$border-radius: 8px !default;
 
 body{
   font-family: 'Noto Serif', serif;
   font-size: 16px;
-  background-color: $primary-color;
+  background-color: map-get($color, primary);
   margin: 0 auto;
   max-width: 1350px;
   min-width: 303px;
@@ -18,24 +18,48 @@ h1, h2{
 }
 
 h1{
-  color: $primary-color;
+  color: map-get($color, primary);
   width: 20%;
 }
 
 h2{
-  color: $tertiary-color;
+  color: map-get($color, tertiary);
 }
 
 a,
 a:link {
-  color: $quadriary-color;
+  color: map-get($color, quadriary);
 }
 
 a:hover,
 a:focus{
-  color: $secondary-color;
+  color: map-get($color, secondary);
 }
 
 header{
-  background-color: $secondary-color;
+  background-color: map-get($color, secondary);
+}
+
+ul,li {
+  list-style-type: none;
+  list-style-position:inside;
+  margin:0;
+  padding:0;
+}
+
+button{
+  background: map-get($color, secondary);
+  color: map-get($color, primary);
+  @include border;
+  font-size: .8em;
+  &:hover{
+    background: map-get($color, fifth);
+  }
+}
+
+input{
+  display:block;
+  margin-bottom: 1em;
+  background-color: map-get($color, fifth);
+  color: map-get($color, primary);
 }

@@ -1,11 +1,10 @@
+@import "percent";
+
 .l-flex{
   display: flex;
   justify-content: space-around;
-  width: 100%
-}
-
-@media all and (min-width: 800px){
-  .l-flex{
+  width: percent(100);
+  @media all and (min-width: 800px){
     display: flex;
     justify-content: center;
   }

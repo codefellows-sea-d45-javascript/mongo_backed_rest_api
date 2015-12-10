@@ -1,12 +1,5 @@
-$primary-color: #FFFDF7;
-$secondary-color: #EF8354;
-$tertiary-color:#313442;
-$quadriary-color: #4F5D75;
-$fifth-color: #BFC0C0;
-
 .in-header{
   display: inline-block;
-
 }
 
 .logo {
@@ -20,29 +13,4 @@ $fifth-color: #BFC0C0;
 
 .in-message-container{
   margin: 0 0 0 1em;
-}
-
-ul,li {
-  list-style-type: none;
-  list-style-position:inside;
-  margin:0;
-  padding:0;
-}
-
-button{
-  background: $secondary-color;
-  color: $primary-color;
-  border-radius: 8px;
-  font-size: .8em;
-}
-
-button:hover{
-  background: $fifth-color;
-}
-
-input{
-  display:block;
-  margin-bottom: 1em;
-  background-color: $fifth-color;
-  color: $primary-color;
 }
