@@ -15,9 +15,9 @@ header h1 {
 }
 
 @media all and (max-width: 900px) {
-
+  .form-field * {
+    text-align: left;
+    display: block;
+  }
 }
 
-@media all and (max-width: 420px) {
-
-}

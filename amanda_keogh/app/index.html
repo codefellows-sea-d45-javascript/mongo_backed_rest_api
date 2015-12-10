@@ -22,10 +22,15 @@
     </section>
 
     <form class="section-box" name="newMorderorForm" data-ng-submit="create(newMorderor)">
-      <label for="newMorderorName">Name:</label>
-      <input type="text" id="newMorderorName" data-ng-model="newMorderor.name">
-      <label for="newMorderorVerb">Verb:</label>
-      <input type="text" id="newMorderorVerb" data-ng-model="newMorderor.verb">
+      <div class="form-field">
+        <label for="newMorderorName">Name:</label>
+        <input type="text" id="newMorderorName" data-ng-model="newMorderor.name">
+      </div>
+
+      <div class="form-field">
+        <label for="newMorderorVerb">Verb:</label>
+        <input type="text" id="newMorderorVerb" data-ng-model="newMorderor.verb">
+      </div>
 
       <button class="form-button" type="submit">Create New Morderor</button>
     </form>
