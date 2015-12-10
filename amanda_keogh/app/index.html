@@ -4,40 +4,54 @@
 <head>
   <meta charset="UTF-8">
   <title>MorderMens Morder Mens</title>
+  <link rel="stylesheet" type="text/css" href="styles.min.css"/>
 </head>
 
 <body data-ng-app="morderMens">
   <main data-ng-controller="IntroController">
-    <h1>MORDERMENS!</h1>
-    <h2>{{intro}}</h2>
+    <header>
+      <h1>MORDERMENS!</h1>
+      <h2>{{intro}}</h2>
+    </header>
 
-    <form name="newMorderorForm" data-ng-submit="create(newMorderor)">
+    <section class="container section-box" id="vs-container">
+
+      <section class='vs-box' id="vs-first">Here's one!</section>
+      <section class='vs-box' id="vs-second">Here's two!</section>
+
+    </section>
+
+    <form class="section-box" name="newMorderorForm" data-ng-submit="create(newMorderor)">
       <label for="newMorderorName">Name:</label>
       <input type="text" id="newMorderorName" data-ng-model="newMorderor.name">
       <label for="newMorderorVerb">Verb:</label>
       <input type="text" id="newMorderorVerb" data-ng-model="newMorderor.verb">
 
-      <button type="submit">Create New Morderor</button>
+      <button class="form-button" type="submit">Create New Morderor</button>
     </form>
+    <section class="section-box">
+      Choose your morderman:
+      <button data-ng-click="getAll()">Get Everyone!</button>
+    </section>
+      <div class="container">
+        <div class="morderor" data-ng-repeat="morderor in morderors">
+          <h2>{{morderor.name}}</h2>
+          <form name="editMorderor{{morderor._id}}" data-ng-submit="update(morderor)" data-ng-if="morderor.editing">
 
-    Choose your morderman:
-    <button data-ng-click="getAll()">Get Everyone!</button>
-    <div data-ng-repeat="morderor in morderors">
-      <h2>{{morderor.name}} {{morderor.verb}}!!</h2>
-      <form name="editMorderor{{morderor._id}}" data-ng-submit="update(morderor)" data-ng-if="morderor.editing">
+            <label for="morderorName{{morderor._id}}">Name:</label>
+            <input type="text" id="morderorName{{morderor._id}}" data-ng-model="morderor.name" placeholder="{{morderor.name}}">
 
-        <label for="morderorName{{morderor._id}}">Name:</label>
-        <input type="text" id="morderorName{{morderor._id}}" data-ng-model="morderor.name" placeholder="{{morderor.name}}">
+            <label for="morderorVerb{{morderor._id}}">Verb:</label>
+            <input type="text" id="morderorVerb{{morderor._id}}" data-ng-model="morderor.verb" placeholder="{{morderor.verb}}">
 
-        <label for="morderorVerb{{morderor._id}}">Verb:</label>
-        <input type="text" id="morderorVerb{{morderor._id}}" data-ng-model="morderor.verb" placeholder="{{morderor.verb}}">
-
-        <button type="submit">Submit Changes</button>
-        <button data-ng-click="morderor.editing = false; refresh(morderor)">Cancel!!</button>
-      </form>
-      <button data-ng-if="!morderor.editing" data-ng-click="morderor.editing = true">Change me!</button>
-      <button data-ng-click="remove(morderor)">Kill me!</button>
-    </div>
+            <button class="form-button" type="submit">Submit Changes</button>
+            <button class="form-button" data-ng-click="morderor.editing = false; refresh(morderor)">Cancel!!</button>
+          </form>
+          <button>Pick Me!</button>
+          <button class="form-button" data-ng-if="!morderor.editing" data-ng-click="morderor.editing = true">Change me!</button>
+          <button class="form-button" data-ng-click="remove(morderor)">Kill me!</button>
+        </div>
+      </div>
   </main>
 
 

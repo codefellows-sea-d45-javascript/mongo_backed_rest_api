@@ -29,7 +29,7 @@ gulp.task('webpack:dev', function() {
 });
 
 gulp.task('css:dev', function() {
-  return gulp.src('app/css/**/*.css')
+  return gulp.src(['app/css/reset.css', 'app/css/base.css', 'app/css/layout.css', 'app/css/modules.css', 'app/css/state.css'])
     .pipe(concatCss('styles.min.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest('build/'));
