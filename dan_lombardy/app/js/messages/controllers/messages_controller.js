@@ -16,6 +16,15 @@ module.exports = function(app){
       });
     };
 
+    $scope.get = function(oneWordTitle){
+      $http.get('/api/messages/' + oneWordTitle )
+        .then(function(res){
+          $scope.oneWordTitle;
+        }, function(err){
+          console.log(oneWordTitle + " has been viewed.")
+        });
+    };
+
     $scope.create = function(message){
       $http.post('/api/messages', message)
       .then(function(res){

@@ -24,6 +24,9 @@ h1{
 
 h2{
   color: map-get($color, tertiary);
+  background-color: map-get($color, secondary);
+  padding: .5em;
+  border-radius: border(4px);
 }
 
 a,
