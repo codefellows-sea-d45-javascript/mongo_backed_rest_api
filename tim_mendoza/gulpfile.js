@@ -19,7 +19,7 @@ gulp.task('webpack:dev', function() {
       filename: 'bundle.js'
     }
   }))
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(gulp.dest('build/'));
 });
 
@@ -39,12 +39,6 @@ gulp.task('css:dev', function() {
   .pipe(sass().on('error', sass.logError))
   .pipe(cssMinify())
   .pipe(sourceMaps.write('./'))
-  .pipe(gulp.dest('build/'));
-});
-
-gulp.task('uglify:dev', function() {
-  gulp.src('build/bundle.js')
-  .pipe(uglify())
   .pipe(gulp.dest('build/'));
 });
 

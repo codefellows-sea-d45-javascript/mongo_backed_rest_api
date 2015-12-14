@@ -3,7 +3,7 @@ require('angular-route');
 var angular = window.angular;
 
 var moviesApp = angular.module('MoviesApp', ['ngRoute']);
-//require('./services/services')(moviesApp);
+require('./services/services')(moviesApp);
 require('./movies/movies')(moviesApp);
 
 moviesApp.config(['$routeProvider', function($route) {
