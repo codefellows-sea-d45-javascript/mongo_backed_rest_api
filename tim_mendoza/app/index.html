@@ -28,9 +28,7 @@
 
       <ul>
         <li data-ng-repeat="movie in movies">
-          {{movie.title}}
-          <button type="button" data-ng-if="!editing" data-ng-click="edit(movie)">Edit Movie</button>
-          <button type="button" data-ng-if="!editing" data-ng-click="remove(movie)">Delete Movie</button>
+          <div data-movie-directive data-movie="movie" data-edit="edit(movie)"></div>
         </li>
 
       </ul>
