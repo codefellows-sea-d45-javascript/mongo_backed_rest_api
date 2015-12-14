@@ -11,6 +11,7 @@ body{
   margin: 0 auto;
   max-width: 1350px;
   min-width: 303px;
+
 }
 
 h1, h2{
@@ -26,7 +27,8 @@ h2{
   color: map-get($color, tertiary);
   background-color: map-get($color, secondary);
   padding: .5em;
-  border-radius: border(4px);
+  @include border(4px);
+  text-align: center;
 }
 
 a,

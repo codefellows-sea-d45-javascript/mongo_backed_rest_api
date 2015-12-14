@@ -1,3 +1,8 @@
+@import "config";
+@import "border-radius";
+
+$border-radius: 8px !default;
+
 .in-header{
   display: inline-block;
 }
@@ -11,7 +16,34 @@
   background-size: 100px 82px;
 }
 
-.in-message-container{
-  margin: 0 0 0 1em;
-  
+.center-margin{
+  margin: 0 1em;
+}
+
+.flex-size-sm{
+  flex-basis: 25%;
+}
+
+.flex-size-md{
+  flex-basis: 50%;
+}
+
+.flex-size-lg{
+  flex-basis: 75%;
+}
+
+.tertiary-box{
+  background-color: $tertiary;
+  color: $primary;
+  @include border(4px);
+}
+
+.flex-size-mobile{
+  @media all and (max-width: 721px){
+    flex-basis: 75%;
+  }
+}
+
+.in-secret-padding{
+  padding: 1em;
 }

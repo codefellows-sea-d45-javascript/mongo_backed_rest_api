@@ -4,7 +4,9 @@ module.exports = function(app){
     $scope.errors = [];
     $scope.defaults = {views: 0, destructMessage: "You only get to read this 3 times!" };
     $scope.newMessage = angular.copy($scope.defaults);
+    $scope.messageView = undefined;
     saveMsg = {};
+
 
 
     $scope.getAll = function(){
@@ -16,13 +18,21 @@ module.exports = function(app){
       });
     };
 
-    $scope.get = function(oneWordTitle){
-      $http.get('/api/messages/' + oneWordTitle )
+    $scope.get = function(title){
+
+
+      $http.get('/api/messages/' + title)
         .then(function(res){
-          $scope.oneWordTitle;
+          $scope.messageView = res.data;
+          $scope.getAll();
         }, function(err){
-          console.log(oneWordTitle + " has been viewed.")
+          console.log("get error was " + err);
         });
+    };
+
+    $scope.close = function(){
+      title = false;
+      $scope.messageView = undefined;
     };
 
     $scope.create = function(message){

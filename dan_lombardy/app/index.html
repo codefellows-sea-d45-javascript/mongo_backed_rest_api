@@ -14,13 +14,26 @@
 
   </header>
 
-  <main data-ng-controller="MessagesController" data-ng-init="getAll()" class="l-message-container">
-    <ul id='errorslist' class="in-message-container">
+  <main data-ng-controller="MessagesController" data-ng-init="getAll()">
+    <ul id='errorslist'>
       <li data-ng-repeat="error in errors">{{error}}</li>
     </ul>
 
+  <section class="messages-container">
+    <section class="in-message-container flex-size-sm flex-size-mobile" >
+      <form name="secretForm" data-ng-submit="get(title)" >
+        <h2>Secret Message</h2>
+        <label for="titleName">Enter Title</label>
+        <input type="text" id="titleName" required data-ng-model="title">
+        <button type="submit">Get Message</button>
+      </form>
+    </section>
 
-    <section class="in-message-container" >
+
+
+
+  <section class="in-message-container flex-size-md flex-size-mobile center-margin"  >
+    <section>
       <h2>Available Messages</h2>
       <ul id="messageList" >
         <li data-ng-repeat="message in messages">{{message.oneWordTitle}}
@@ -45,8 +58,21 @@
         </li>
       </ul>
     </section>
+    <section  data-ng-if="messageView" class="tertiary-box">
+        <h2>view me</h2>
+        <ul class="in-secret-padding">
+          <li>Title: {{messageView.oneWordTitle}}</li>
+          <li>Secret: {{messageView.secretToRead}}</li>
+          <li>Destruct Message: {{messageView.destructMessage}}</li>
+          <li>Priority: {{messageView.priority}}</li>
+        </ul>
+      <button data-ng-click="close()">Close</button>
+    </section>
+  </section>
 
-    <section class="in-message-container">
+
+
+    <section class="in-message-container flex-size-sm flex-size-mobile" >
       <form name="newMessageForm" data-ng-submit="create(newMessage)">
         <h2>New Message</h2>
 
@@ -62,7 +88,11 @@
         <button type="submit" data-ng-disabled="newMessageForm.$invalid">Create New Message</button>
       </form>
     </section>
+  </section>
+
+
   </main>
+
 
 
 

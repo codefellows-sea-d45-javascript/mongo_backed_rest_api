@@ -10,9 +10,12 @@
   }
 }
 
-.l-message-container{
-  @extend .l-flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
+.messages-container{
+  flex-wrap: nowrap;
+  display: flex;
+  margin:1em;
+  @media all and (max-width: 725px){
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 }
