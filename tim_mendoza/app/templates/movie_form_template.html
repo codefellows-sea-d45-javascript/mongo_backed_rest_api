@@ -1,0 +1,19 @@
+<form name="newMovieForm" class="card movie" data-ng-submit="create(newMovie)">
+  <label for="movieTitle">Title:</label>
+  <input type="text" name="movieTitle" required data-ng-model="newMovie.title"><br>
+
+  <label for="movieYear">Year:</label>
+  <input type="text" name="movieYear" data-ng-model="newMovie.year"><br>
+
+  <label for="movieDirector">Director:</label>
+  <input type="text" name="movieDirector" data-ng-model="newMovie.director"><br>
+
+  <label for="movieActors">Actors:</label>
+  <input type="text" name="movieActors" data-ng-model="newMovie.actors"><br>
+
+  <span class="">
+    <button type="submit" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="!editing">Create New Movie</button>
+    <button type="button" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="editing" data-ng-click="submitEdit(newMovie)">Submit Edit</button>
+    <button type="button" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
+  </span>
+</form>
