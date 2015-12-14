@@ -8,12 +8,9 @@
   <link rel="stylesheet" href="core.css">
 </head>
 <body data-ng-app="SelfDestructApp">
-  <header class="l-flex">
-      <h1 class="in-header">Self Destruct Messenger</h1>
-      <div class="in-header logo"></div>
 
-  </header>
 
+  <div data-header-directive></div>
   <main data-ng-controller="MessagesController" data-ng-init="getAll()">
     <ul id='errorslist'>
       <li data-ng-repeat="error in errors">{{error}}</li>
