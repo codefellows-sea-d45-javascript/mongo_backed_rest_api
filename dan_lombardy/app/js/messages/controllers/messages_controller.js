@@ -1,26 +1,23 @@
 module.exports = function(app){
-  app.controller("MessagesController", ['$scope', "$http", function($scope, $http){
+  app.controller("MessagesController", ['$scope', "$http", 'ajaxResource', function($scope, $http, ajaxResource){
     $scope.messages = [];
     $scope.errors = [];
     $scope.defaults = {views: 0, destructMessage: "You only get to read this 3 times!" };
     $scope.newMessage = angular.copy($scope.defaults);
     $scope.messageView = undefined;
-    saveMsg = {};
+    var saveMsg = {};
+    var messagesResource = ajaxResource('messages');
 
 
 
     $scope.getAll = function(){
-      $http.get('/api/messages')
-        .then(function(res){
-          $scope.messages = res.data;
-        }, function(err){
-          console.log(err.data);
+      messagesResource.getAll(function(err, data){
+        if(err) return err;
+        $scope.messages = data;
       });
     };
 
     $scope.get = function(title){
-
-
       $http.get('/api/messages/' + title)
         .then(function(res){
           $scope.messageView = res.data;
@@ -36,13 +33,11 @@ module.exports = function(app){
     };
 
     $scope.create = function(message){
-      $http.post('/api/messages', message)
-      .then(function(res){
-        $scope.messages.push(res.data);
+      messagesResource.create(message, function(err, data){
+        if(err) return err;
+        $scope.messages.push(data);
         $scope.newMessage = angular.copy($scope.defaults);
         console.log("Message created");
-      }, function(err){
-        console.log(err.data)
       });
     };
 
