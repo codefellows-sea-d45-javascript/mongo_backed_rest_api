@@ -6,7 +6,8 @@ module.exports = function(app) {
       scope: {
         movie: '=',
         edit: '&',
-        remove: '&'
+        remove: '&',
+        editing: '='
       }
     };
   });

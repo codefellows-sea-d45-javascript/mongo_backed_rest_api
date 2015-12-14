@@ -52,7 +52,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
-	__webpack_require__(6);
+	__webpack_require__(7);
 
 	describe('the movies controller', function() {
 	  var $httpBackend;
@@ -66,14 +66,14 @@
 	    $ControllerConstructor = $controller;
 	  }));
 
-	  it('should be able to creat a controller', function() {
+	  it('should be able to create a controller', function() {
 	    var controller = $ControllerConstructor('MoviesController', {$scope: $scope});
 	    expect(typeof $scope).toBe('object');
 	    expect(typeof controller).toBe('object');
 	    expect(Array.isArray($scope.movies)).toBe(true);
 	  });
 
-	  describe('REST request function', function() {
+	  describe('REST request functions', function() {
 	    beforeEach(angular.mock.inject(function(_$httpBackend_, $rootScope) {
 	      $httpBackend = _$httpBackend_;
 	      $scope = $rootScope.$new();
@@ -91,6 +91,45 @@
 	      $httpBackend.flush();
 	      expect($scope.movies[0].title).toBe('thing');
 	    });
+
+	    it('should be able to create a new movie', function() {
+	      $httpBackend.expectPOST('/api/movies', {title: 'testmovie'}).respond(200, {title: 'a different movie'});
+	      expect($scope.movies.length).toBe(0);
+	      expect($scope.newMovie).toBe(undefined);
+	      $scope.newMovie = {title: 'testmovie'};
+	      $scope.create($scope.newMovie);
+	      $httpBackend.flush();
+	      expect($scope.newMovie).toBe(null);
+	      expect($scope.movies[0].title).toBe('a different movie');
+	    });
+
+	    it('should be able to delete a movie', function() {
+	      $httpBackend.expectDELETE('/api/movies/12345').respond(200);
+	      $scope.movies[0] = {
+	        _id: 12345,
+	        title: 'test'
+	      };
+	      $scope.movies[1] = {title: 'othermovie'};
+	      $scope.remove($scope.movies[0]);
+	      $httpBackend.flush();
+	      expect($scope.movies[0].title).toBe('othermovie');
+	    });
+	    it('should be able to update a movie', function() {
+	      $httpBackend.expectPUT('/api/movies/23456').respond(200, 'update succesful');
+	      $scope.movies = [
+	        {title: 'movieone'},
+	        {title: 'movietwo', year: 1999, _id: '23456'},
+	        {title: 'moviethree'}
+	      ];
+	      $scope.edit($scope.movies[1]);
+	      expect($scope.movies[1].title).toBe('moviethree');
+	      expect($scope.editing).toBe(true);
+	      expect($scope.newMovie.title).toBe('movietwo');
+	      $scope.newMovie.title = 'movieedit';
+	      $scope.submitEdit($scope.newMovie);
+	      $httpBackend.flush();
+	      expect($scope.movies[2].title).toBe('movieedit');
+	    });
 	  });
 	});
 
@@ -103,6 +142,7 @@
 	var angular = window.angular;
 
 	var moviesApp = angular.module('MoviesApp', []);
+	//require('./services/services')(moviesApp);
 	__webpack_require__(4)(moviesApp);
 
 
@@ -29135,6 +29175,7 @@
 
 	module.exports = function(app) {
 	  __webpack_require__(5)(app);
+	  __webpack_require__(6)(app);
 	};
 
 
@@ -29163,7 +29204,7 @@
 	      $http.post('/api/movies', newMovie).then(
 	        function(res) {
 	          $scope.movies.push(res.data);
-	          $scope.newMovie = {};
+	          $scope.newMovie = null;
 	        },
 	        function(res) {
 	          console.log(res);
@@ -29174,7 +29215,7 @@
 	    $scope.remove = function(movie) {
 	      $http.delete('/api/movies/' + movie._id).then(
 	        function(res) {
-	          $scope.getAll();
+	          $scope.movies.splice($scope.movies.indexOf(movie), 1);
 	        },
 	        function(res) {
 	          console.log(res);
@@ -29215,6 +29256,25 @@
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.directive('movieDirective', function() {
+	    return {
+	      restrict: 'AC',
+	      templateUrl: '/templates/movie_directive_template.html',
+	      scope: {
+	        movie: '=',
+	        edit: '&',
+	        remove: '&'
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	/**

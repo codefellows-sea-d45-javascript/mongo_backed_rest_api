@@ -55,3 +55,4 @@ gulp.watch(['test/client/movies_controller_test.js'], ['webpack:test']);
 
 gulp.watch(['app/scss/**/*.scss'], ['css:dev']);
 gulp.watch(['app/**/*.html'], ['static:dev']);
+gulp.watch(['app/**/*.js'], ['webpack:dev']);

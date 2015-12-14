@@ -34,11 +34,11 @@
 
       <ul class="card">
         <li class="movie" data-ng-repeat="movie in movies">
-          {{movie.title}}
-          <span class="movie-buttons">
-            <button type="button" class="btn" ng-class="{disabled: editing}" data-ng-disabled="editing" data-ng-click="edit(movie)">Edit Movie</button>
-            <button type="button" class="btn" ng-class="{disabled: editing}" data-ng-disabled="editing" data-ng-click="remove(movie)">Delete Movie</button>
-          </span>
+          <div data-movie-directive
+            data-movie="movie"
+            data-edit="edit(movie)"
+            data-remove="remove(movie)"
+            data-editing="editing"></div>
         </li>
 
       </ul>
