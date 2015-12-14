@@ -1,0 +1,14 @@
+@media (min-width: 770px) {
+
+  @for $i from 1 through 12 {
+    .width-#{$i}-columns {
+      width: $i / 12 * 100%;
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .offset-by-#{$i} {
+      margin-left: $i / 12 * 100%;
+    }
+  }
+}

@@ -2,33 +2,43 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Slabo+27px|Roboto' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="application.css">
     <title>Movies</title>
   </head>
   <body data-ng-app="MoviesApp">
-    <h1>Movies!</h1>
-    <main data-ng-controller="MoviesController" data-ng-init="getAll()">
+    <header class="offset-by-1">
+      <h1>Movies!</h1>
+    </header>
+    <main class="width-8-columns offset-by-2" data-ng-controller="MoviesController" data-ng-init="getAll()">
 
-      <form name="newMovieForm" data-ng-submit="create(newMovie)">
+      <form name="newMovieForm" class="card movie" data-ng-submit="create(newMovie)">
         <label for="movieTitle">Title:</label>
-        <input type="text" name="movieTitle" data-ng-model="newMovie.title">
+        <input type="text" name="movieTitle" required data-ng-model="newMovie.title"><br>
 
         <label for="movieYear">Year:</label>
-        <input type="text" name="movieYear" data-ng-model="newMovie.year">
+        <input type="text" name="movieYear" data-ng-model="newMovie.year"><br>
 
         <label for="movieDirector">Director:</label>
-        <input type="text" name="movieDirector" data-ng-model="newMovie.director">
+        <input type="text" name="movieDirector" data-ng-model="newMovie.director"><br>
 
         <label for="movieActors">Actors:</label>
-        <input type="text" name="movieActors" data-ng-model="newMovie.actors">
+        <input type="text" name="movieActors" data-ng-model="newMovie.actors"><br>
 
-        <button type="submit" data-ng-if="!editing">Create New Movie</button>
-        <button type="button" data-ng-if="editing" data-ng-click="submitEdit(newMovie)">Submit Edit</button>
-        <button type="button" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
+        <span class="">
+          <button type="submit" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="!editing">Create New Movie</button>
+          <button type="submit" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="editing" data-ng-click="submitEdit(newMovie)">Submit Edit</button>
+          <button type="button" class="btn" data-ng-disabled="newMovieForm.$invalid" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
+        </span>
       </form>
 
-      <ul>
-        <li data-ng-repeat="movie in movies">
-          <div data-movie-directive data-movie="movie" data-edit="edit(movie)"></div>
+      <ul class="card">
+        <li class="movie" data-ng-repeat="movie in movies">
+          {{movie.title}}
+          <span class="movie-buttons">
+            <button type="button" class="btn" ng-class="{disabled: editing}" data-ng-disabled="editing" data-ng-click="edit(movie)">Edit Movie</button>
+            <button type="button" class="btn" ng-class="{disabled: editing}" data-ng-disabled="editing" data-ng-click="remove(movie)">Delete Movie</button>
+          </span>
         </li>
 
       </ul>
