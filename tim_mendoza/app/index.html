@@ -7,29 +7,7 @@
     <title>Movies</title>
   </head>
   <body data-ng-app="MoviesApp">
-    <header class="offset-by-1">
-      <h1>Movies!</h1>
-    </header>
-    <main class="width-8-columns offset-by-2" data-ng-controller="MoviesController" data-ng-init="getAll()">
-
-      <div data-movie-form
-        data-editing="editing"
-        data-new-movie="newMovie"
-        data-submit-edit="submitEdit(newMovie)"
-        data-create="create(newMovie)"
-        data-cancel-edit="cancelEdit()">
-      </div>
-
-      <ul class="card">
-        <li class="movie" data-ng-repeat="movie in movies">
-          <div data-movie-directive
-            data-movie="movie"
-            data-edit="edit(movie)"
-            data-remove="remove(movie)"
-            data-editing="editing">
-          </div>
-        </li>
-      </ul>
+    <main data-ng-view>
 
     </main>
     <script src="bundle.js" charset="utf-8"></script>
