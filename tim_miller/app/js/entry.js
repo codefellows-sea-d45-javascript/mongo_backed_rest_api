@@ -1,11 +1,8 @@
 require('angular/angular');
 var angular = window.angular;
 
-var officerApp = angular.module('officersAndFelons', []);
-officerApp.controller('OfficerController', ['$scope', function($scope) {
-  $scope.greeting = 'What cha gonna do when the come for you?';
-
-  $scope.alertGreeting = function() {
-    alert($scope.greeting);
-  };
-}]);
+var officerAndFelonApp = angular.module('OfficerAndFelonApp', []);
+require('./services/services.js')(officerAndFelonApp);
+require('./officers/officers.js')(officerAndFelonApp);
+require('./felons/felons.js')(officerAndFelonApp);
+require('./busted/busted.js')(officerAndFelonApp);

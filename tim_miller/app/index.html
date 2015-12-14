@@ -2,15 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Wow such website!</title>
+  <title>Cops!</title>
+  <link rel="stylesheet" type="text/css" href="styles.min.css">
 </head>
-<body data-ng-app="officersAndFelons">
-  <main data-ng-controller="OfficerController">
-    <h1>Bad Boys Bad Boys</h1>
-    <h2>{{greeting}}</h2>
+<body data-ng-app="OfficerAndFelonApp">
+  <h1>Bad Boys Bad Boys</h1>
+  <main data-ng-controller="BustedController">
+    <button data-ng-click="busted()">BUSTED!</button>
+    <p>{{outcome}}</p>
 
-    <input type="text" data-ng-model="greeting">
-    <button data-ng-click="alertGreeting()">Salute!</button>
+    <main data-ng-controller="OfficersController" data-ng-init="getAllOfficers()">
+      <ul id="errorslist">
+        <li data-ng-repeat="error in errors">{{error}}</li>
+      </ul>
+      <form name="newOfficerForm" data-ng-submit="create(newOfficer)">
+        <h2>New Officer:</h2>
+        <label for="newOfficerName">Name:</label>
+        <input type="text" id="newOfficerName" required data-ng-model="newOfficer.name" placeholder="name">
+        <button type="submit" data-ng-disabled="newOfficerForm.$invalid">Create New Officer</button>
+      </form>
+      <ul id="officerList">
+        <li data-ng-repeat="officer in officers">Name: {{officer.name}} Criminals Busted: {{officer.criminalsBusted}}
+          <button data-ng-click="remove(officer)" data-ng-if="!officer.editing">Delete This Officer</button>
+          <form name="officerForm{{officer._id}}" data-ng-submit="update(officer)" data-ng-if="officer.editing">
+
+            <h2>Update Officer:</h2>
+
+            <label for="officerName{{officer._id}}">Name:</label>
+            <input type="text" id="officerName{{officer._id}}" required data-ng-model="officer.name" placeholder="name">
+
+            <button type="submit">Update Officer</button>
+            <button data-ng-click="cancel(officer)" data-ng-click="officer.name = officer.temp">Cancel</button>
+
+          </form>
+          <button data-ng-click="temp(officer)" data-ng-if="!officer.editing">Update</button>
+        </li>
+      </ul>
+    </main>
+    <main data-ng-controller="FelonsController" data-ng-init="getAllFelons()">
+
+      <form name="newFelonForm" data-ng-submit="create(newFelon)">
+        <h2>New Felon:</h2>
+        <label for="newFelonName">Name:</label>
+        <input type="text" id="newFelonName" required data-ng-model="newFelon.name" placeholder="name">
+        <button type="submit" data-ng-disabled="newFelonForm.$invalid">Create New Felon</button>
+      </form>
+
+      <ul id="felonList">
+        <li data-ng-repeat="felon in felons">Name: {{felon.name}} In Jail: {{felon.inJail}}
+          <button data-ng-click="remove(felon)" data-ng-if="!felon.editing">Delete This Felon</button>
+
+          <form name="felonForm{{felon._id}}" data-ng-submit="update(felon)" data-ng-if="felon.editing">
+
+            <h2>Update felon:</h2>
+
+            <label for="felonName{{felon._id}}">Name:</label>
+            <input type="text" id="felonName{{felon._id}}" required data-ng-model="felon.name" placeholder="name">
+
+            <button type="submit">Update felon</button>
+            <button data-ng-click="cancel(felon)">Cancel</button>
+
+          </form>
+          <button data-ng-click="temp(felon)" data-ng-if="!felon.editing">Update</button>
+        </li>
+      </ul>
+
+    </main>
   </main>
   <script src="bundle.js"></script>
 </body>
