@@ -1,6 +1,3 @@
-require(__dirname + '/../../app/js/entry.js');
-require('angular-mocks');
-
 describe('the movies controller', function() {
   var $httpBackend;
   var $ControllerConstructor;
@@ -62,7 +59,7 @@ describe('the movies controller', function() {
       expect($scope.movies[0].title).toBe('othermovie');
     });
     it('should be able to update a movie', function() {
-      $httpBackend.expectPUT('/api/movies/23456').respond(200, 'update succesful');
+      $httpBackend.expectPUT('/api/movies/23456', {title: 'movieedit', year: 1999, _id: '23456'}).respond(200, 'update succesful');
       $scope.movies = [
         {title: 'movieone'},
         {title: 'movietwo', year: 1999, _id: '23456'},

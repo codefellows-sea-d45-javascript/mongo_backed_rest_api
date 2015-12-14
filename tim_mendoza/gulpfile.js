@@ -45,7 +45,7 @@ gulp.task('css:dev', function() {
 gulp.task('build:dev', ['static:dev', 'webpack:dev', 'css:dev']);
 gulp.task('default', ['build:dev']);
 
-gulp.watch(['test/client/movies_controller_test.js'], ['webpack:test']);
+gulp.watch(['test/client/*.js', '!test/client/test_bundle.js'], ['webpack:test']);
 
 gulp.watch(['app/scss/**/*.scss'], ['css:dev']);
 gulp.watch(['app/**/*.html'], ['static:dev']);
