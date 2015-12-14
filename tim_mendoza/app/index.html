@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Movies</title>
+  </head>
+  <body data-ng-app="MoviesApp">
+    <h1>Movies!</h1>
+    <main data-ng-controller="MoviesController" data-ng-init="getAll()">
+
+      <form name="newMovieForm" data-ng-submit="create(newMovie)">
+        <label for="movieTitle">Title:</label>
+        <input type="text" name="movieTitle" data-ng-model="newMovie.title">
+
+        <label for="movieYear">Year:</label>
+        <input type="text" name="movieYear" data-ng-model="newMovie.year">
+
+        <label for="movieDirector">Director:</label>
+        <input type="text" name="movieDirector" data-ng-model="newMovie.director">
+
+        <label for="movieActors">Actors:</label>
+        <input type="text" name="movieActors" data-ng-model="newMovie.actors">
+
+        <button type="submit" data-ng-if="!editing">Create New Movie</button>
+        <button type="button" data-ng-if="editing" data-ng-click="submitEdit(newMovie)">Submit Edit</button>
+        <button type="button" data-ng-if="editing" data-ng-click="cancelEdit()">Cancel Edit</button>
+      </form>
+
+      <ul>
+        <li data-ng-repeat="movie in movies">
+          {{movie.title}}
+          <button type="button" data-ng-if="!editing" data-ng-click="edit(movie)">Edit Movie</button>
+          <button type="button" data-ng-if="!editing" data-ng-click="remove(movie)">Delete Movie</button>
+        </li>
+
+      </ul>
+    </main>
+    <script src="bundle.js" charset="utf-8"></script>
+  </body>
+</html>
