@@ -1,3 +1,4 @@
+@import "../config";
 
 @mixin border($radius: $border-radius){
   -moz-border-radius: $radius;

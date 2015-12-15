@@ -1,0 +1,11 @@
+@import '../modules/color_set';
+
+button{
+  background: map-get($color, secondary);
+  color: map-get($color, primary);
+  @include border;
+  font-size: .8em;
+  &:hover{
+    background: map-get($color, fifth);
+  }
+}

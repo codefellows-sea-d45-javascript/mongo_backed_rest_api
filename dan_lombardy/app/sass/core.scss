@@ -1,6 +1,5 @@
-@import "normalize";
-@import "base";
-@import "layout";
-@import "module";
-@import "state";
-@import "theme";
+@import "reset";
+@import "config";
+@import "typography";
+@import "./layouts/home_layout";
+@import "buttons";

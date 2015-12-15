@@ -1,21 +1,11 @@
 @import "percent";
 
-.l-flex{
+.header-flex{
   display: flex;
   justify-content: space-around;
   width: percent(100);
   @media all and (min-width: 800px){
     display: flex;
     justify-content: center;
-  }
-}
-
-.messages-container{
-  flex-wrap: nowrap;
-  display: flex;
-  margin:1em;
-  @media all and (max-width: 725px){
-    flex-wrap: wrap;
-    justify-content: space-around;
   }
 }

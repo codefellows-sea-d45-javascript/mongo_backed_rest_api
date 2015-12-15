@@ -1,8 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Roboto:400,700);
-@import 'color-set';
-@import "border-radius";
-
-$border-radius: 8px !default;
+@import './modules/color_set';
+@import "./modules/border_radius";
 
 body{
   font-family: 'Noto Serif', serif;
@@ -50,16 +48,6 @@ ul,li {
   list-style-position:inside;
   margin:0;
   padding:0;
-}
-
-button{
-  background: map-get($color, secondary);
-  color: map-get($color, primary);
-  @include border;
-  font-size: .8em;
-  &:hover{
-    background: map-get($color, fifth);
-  }
 }
 
 input{
