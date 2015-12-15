@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MorderMens Morder Mens</title>
+</head>
+
+<body data-ng-app="morderMens">
+  <main data-ng-controller="IntroController">
+    <h1>MORDERMENS!</h1>
+    <h2>{{intro}}</h2>
+
+    <form name="newMorderorForm" data-ng-submit="create(newMorderor)">
+      <label for="newMorderorName">Name:</label>
+      <input type="text" id="newMorderorName" data-ng-model="newMorderor.name">
+      <label for="newMorderorVerb">Verb:</label>
+      <input type="text" id="newMorderorVerb" data-ng-model="newMorderor.verb">
+
+      <button type="submit">Create New Morderor</button>
+    </form>
+
+    Choose your morderman:
+    <button data-ng-click="getAll()">Get Everyone!</button>
+    <div data-ng-repeat="morderor in morderors">
+      <h2>{{morderor.name}} {{morderor.verb}}!!</h2>
+      <form name="editMorderor{{morderor._id}}" data-ng-submit="update(morderor)" data-ng-if="morderor.editing">
+
+        <label for="morderorName{{morderor._id}}">Name:</label>
+        <input type="text" id="morderorName{{morderor._id}}" data-ng-model="morderor.name" placeholder="{{morderor.name}}">
+
+        <label for="morderorVerb{{morderor._id}}">Verb:</label>
+        <input type="text" id="morderorVerb{{morderor._id}}" data-ng-model="morderor.verb" placeholder="{{morderor.verb}}">
+
+        <button type="submit">Submit Changes</button>
+        <button data-ng-click="morderor.editing = false; refresh(morderor)">Cancel!!</button>
+      </form>
+      <button data-ng-if="!morderor.editing" data-ng-click="morderor.editing = true">Change me!</button>
+      <button data-ng-click="remove(morderor)">Kill me!</button>
+    </div>
+  </main>
+
+
+  <script src="bundle.js"></script>
+</body>
+
+</html>
