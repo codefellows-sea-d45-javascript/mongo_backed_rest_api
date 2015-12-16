@@ -1,0 +1,44 @@
+
+
+.in-header{
+  display: inline-block;
+
+}
+
+.logo {
+  margin-top: 1em;
+  text-indent: -9999px;
+  width: 100px;
+  height: 82px;
+  background: url(bomber.svg);
+  background-size: 100px 82px;
+}
+
+.in-message-container{
+  margin: 0 0 0 1em;
+}
+
+ul,li {
+  list-style-type: none;
+  list-style-position:inside;
+  margin:0;
+  padding:0;
+}
+
+button{
+  background: #EF8354;
+  color: #FFFDF7;
+  border-radius: 8px;
+  font-size: .8em;
+}
+
+button:hover{
+  background:#BFC0C0;
+}
+
+input{
+  display:block;
+  margin-bottom: 1em;
+  background-color: #BFC0C0;
+  color:#FFFDF7;
+}
