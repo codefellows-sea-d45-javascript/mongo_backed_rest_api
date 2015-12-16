@@ -1,4 +1,8 @@
-
+$primary-color: #FFFDF7;
+$secondary-color: #EF8354;
+$tertiary-color:#313442;
+$quadriary-color: #4F5D75;
+$fifth-color: #BFC0C0;
 
 .in-header{
   display: inline-block;
@@ -26,19 +30,19 @@ ul,li {
 }
 
 button{
-  background: #EF8354;
-  color: #FFFDF7;
+  background: $secondary-color;
+  color: $primary-color;
   border-radius: 8px;
   font-size: .8em;
 }
 
 button:hover{
-  background:#BFC0C0;
+  background: $fifth-color;
 }
 
 input{
   display:block;
   margin-bottom: 1em;
-  background-color: #BFC0C0;
-  color:#FFFDF7;
+  background-color: $fifth-color;
+  color: $primary-color;
 }
