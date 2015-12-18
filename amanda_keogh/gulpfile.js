@@ -28,6 +28,16 @@ gulp.task('webpack:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'test_bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('test/client/'));
+});
+
 gulp.task('css:dev', function() {
   return gulp.src(['app/css/reset.css', 'app/css/base.css', 'app/css/layout.css', 'app/css/modules.css', 'app/css/state.css'])
     .pipe(concatCss('styles.min.css'))
