@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Roboto:400,700);
+@import './modules/color_set';
+@import "./modules/border_radius";
+
+body{
+  font-family: 'Noto Serif', serif;
+  font-size: 16px;
+  background-color: map-get($color, primary);
+  margin: 0 auto;
+  max-width: 1350px;
+  min-width: 303px;
+
+}
+
+h1, h2{
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{
+  color: map-get($color, primary);
+  width: 20%;
+}
+
+h2{
+  color: map-get($color, tertiary);
+  background-color: map-get($color, secondary);
+  padding: .5em;
+  @include border(4px);
+  text-align: center;
+}
+
+a,
+a:link {
+  color: map-get($color, quadriary);
+}
+
+a:hover,
+a:focus{
+  color: map-get($color, secondary);
+}
+
+header{
+  background-color: map-get($color, secondary);
+}
+
+ul,li {
+  list-style-type: none;
+  list-style-position:inside;
+  margin:0;
+  padding:0;
+}
+
+input{
+  display:block;
+  margin-bottom: 1em;
+  background-color: map-get($color, fifth);
+  color: map-get($color, primary);
+}

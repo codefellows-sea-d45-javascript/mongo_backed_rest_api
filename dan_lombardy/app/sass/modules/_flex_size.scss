@@ -1,0 +1,17 @@
+.flex-size-sm{
+  flex-basis: 25%;
+}
+
+.flex-size-md{
+  flex-basis: 50%;
+}
+
+.flex-size-lg{
+  flex-basis: 75%;
+}
+
+.flex-size-mobile{
+  @media all and (max-width: 721px){
+    flex-basis: 75%;
+  }
+}

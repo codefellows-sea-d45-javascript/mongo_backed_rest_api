@@ -1,0 +1,15 @@
+@import "config";
+
+.center-margin{
+  margin: 0 1em;
+}
+
+.tertiary-box{
+  background-color: $tertiary;
+  color: $primary;
+  @include border(4px);
+}
+
+.in-secret-padding{
+  padding: 1em;
+}

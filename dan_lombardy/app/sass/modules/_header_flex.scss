@@ -1,0 +1,11 @@
+@import "percent";
+
+.header-flex{
+  display: flex;
+  justify-content: space-around;
+  width: percent(100);
+  @media all and (min-width: 800px){
+    display: flex;
+    justify-content: center;
+  }
+}

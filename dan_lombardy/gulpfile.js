@@ -63,7 +63,7 @@ gulp.task('webpack:test', function(){
 });
 
 gulp.task('sass:dev', function () {
- gulp.src('./app/sass/sassEntry.scss')
+ gulp.src('./app/sass/core.scss')
   .pipe(sourcemaps.init())
   .pipe(sass().on('error', sass.logError))
   .pipe(minifyCss())
