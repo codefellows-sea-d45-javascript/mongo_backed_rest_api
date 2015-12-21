@@ -1,41 +1,30 @@
 module.exports = function(app) {
-  app.controller('MoviesController', ['$scope', '$http', function($scope, $http) {
+  app.controller('MoviesController', ['$scope', '$http', 'restResource', function($scope, $http, restResource) {
     $scope.movies = [];
     $scope.editing = false;
+    var moviesResource = restResource('movies');
 
     $scope.getAll = function() {
-      $http.get('/api/movies').then(
-        function(res) {
-          $scope.movies = res.data;
-        },
-        function(res) {
-          console.log(res);
-        }
-      );
+      moviesResource.get(function(err, data) {
+        if (err) return console.log(err);
+        $scope.movies = data;
+      });
     };
 
     $scope.create = function(newMovie) {
       if (newMovie.actors) newMovie.actors = newMovie.actors.split(', ');
-      $http.post('/api/movies', newMovie).then(
-        function(res) {
-          $scope.movies.push(res.data);
-          $scope.newMovie = null;
-        },
-        function(res) {
-          console.log(res);
-        }
-      );
+      moviesResource.create(newMovie, function(err, data) {
+        if (err) return console.log(err);
+        $scope.movies.push(data);
+        $scope.newMovie = null;
+      });
     };
 
     $scope.remove = function(movie) {
-      $http.delete('/api/movies/' + movie._id).then(
-        function(res) {
-          $scope.movies.splice($scope.movies.indexOf(movie), 1);
-        },
-        function(res) {
-          console.log(res);
-        }
-      );
+      moviesResource.delete(movie, function(err, data) {
+        if (err) return console.log(err);
+        $scope.movies.splice($scope.movies.indexOf(movie), 1);
+      });
     };
 
     $scope.edit = function(movie) {
@@ -55,15 +44,10 @@ module.exports = function(app) {
       $scope.editing = false;
       $scope.movies.push(movie);
       $scope.newMovie = {};
-      $http.put('/api/movies/' + movie._id, movie).then(
-        function(res) {
-          console.log('movie changed');
-        },
-        function(res) {
-          console.log(res);
-        }
-      );
+      moviesResource.update(movie, function(err, data) {
+        if (err) return console.log(err);
+        console.log('movie changed');
+      });
     };
-
   }]);
 };

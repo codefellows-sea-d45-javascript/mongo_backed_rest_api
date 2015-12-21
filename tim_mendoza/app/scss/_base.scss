@@ -1,0 +1,24 @@
+body {
+  font-family: 'Roboto';
+  font-size: 1em;
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+h1 {
+  font-family: 'Roboto';
+  font-size: 2em;
+}
+
+ul {
+  list-style: none;
+}
+
+input {
+  margin: 5px;
+  color: #000;
+  border-radius: $global-radius;
+  background-color: #aaa;
+  border: none;
+  padding: 5px;
+}
