@@ -1,0 +1,14 @@
+@mixin btn-maker($bgcolor: grey, $txt: white) {
+
+  backgroud-color: $bgcolor;
+  color: $txt;
+
+  &:hover{
+    background-color: darken($bgcolor: 10%);
+  }
+
+  &:disabled {
+    background-color: darken($bgcolor: 10%);
+    color: grey
+  }
+}

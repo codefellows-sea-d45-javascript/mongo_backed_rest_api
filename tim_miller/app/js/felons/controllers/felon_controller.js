@@ -13,6 +13,15 @@ module.exports = function(app) {
       });
     };
 
+    $scope.$on('busted', function(e, data) {
+      felonResource.getAll(function(err, data) {
+        if (err) return err;
+
+        $scope.felons = data;
+      });
+    });
+
+
     $scope.create = function(felon) {
 
       felonResource.create(felon, function(err, data) {

@@ -1,0 +1,61 @@
+.heading {
+  padding-left: em(10);
+}
+
+.btn-large {
+  @include btn-maker(red);
+  justify-content: center;
+  margin: auto;
+  border-radius: em(25);
+  text: em(20);
+  width: em(200);
+  height: em(50);
+}
+
+.resource {
+  display: flex;
+  flex-direction: column;
+  border: em(1) solid;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  button {
+    @include btn-maker();
+    font-size: em(10);
+  }
+}
+
+.resource-heading {
+  margin-top: 0px;
+}
+
+.outer-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+li{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list-content{
+  justify-content: center;
+  width: 100%;
+}
+
+.input-form{
+  dispaly: flex;
+  flex-wrap: wrap;
+  h2 {
+    width: 100%;
+  }
+  label{
+    width: 30%;
+  }
+  input {
+    width: 70%;
+  }
+}
+

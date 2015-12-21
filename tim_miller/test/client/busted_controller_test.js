@@ -34,8 +34,12 @@ describe('busted controller', function() {
     it('should respond to a $scope.busted()', function() {
       $httpBackend.expectGET('/api/busted').respond(200, {name: 'test name'});
       $scope.busted();
+      $scope.$on('busted', function(e, data) {
+        $scope.busted = true;
+      });
       $httpBackend.flush();
       expect($scope.outcome.name).toBe('test name');
+      expect($scope.busted).toBe(true);
     });
 
   });

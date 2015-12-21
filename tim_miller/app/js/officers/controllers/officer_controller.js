@@ -13,6 +13,14 @@ module.exports = function(app) {
       });
     };
 
+    $scope.$on('busted', function(e, data) {
+      officerResource.getAll(function(err, data) {
+        if (err) return err;
+
+        $scope.officers = data;
+      });
+    });
+
     $scope.create = function(officer) {
 
       officerResource.create(officer, function(err, data) {
