@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <title>Book Library</title>
+</head>
+<body data-ng-app="bookStreamApp">
+  <h1>Deez Bookz</h1>
+  <main data-ng-controller="booksController" data-ng-init="getAll()">
+    <ul id="booklist">
+      <li data-ng-repeat="book in books">{{book.title}} by {{book.author}}</li>
+    </ul>
+  </main>
+  <script src="/bundle.js"></script>
+</body>
+</html>

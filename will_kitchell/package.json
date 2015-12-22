@@ -1,0 +1,33 @@
+{
+  "name": "will_kitchell",
+  "version": "1.0.0",
+  "description": "Mongo backed rest api",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/picklekitch/mongo_backed_rest_api.git"
+  },
+  "author": "william.kitchell@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/picklekitch/mongo_backed_rest_api/issues"
+  },
+  "homepage": "https://github.com/picklekitch/mongo_backed_rest_api#readme",
+  "devDependencies": {
+    "angular": "^1.4.8",
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.1",
+    "eat": "^0.1.1",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "mongoose": "^4.2.9",
+    "webpack-stream": "^2.3.0"
+  }
+}
