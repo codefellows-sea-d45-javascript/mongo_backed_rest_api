@@ -5,6 +5,9 @@ var webpack = require('webpack-stream');
 var concatCss = require('gulp-concat-css');
 var minifyCss = require('gulp-minify-css');
 
+var sourcemaps = require('gulp-sourcemaps');
+var sass = require('gulp-sass');
+
 var appFiles = ['server.js', __dirname + '/routes/**/*.js', __dirname + '/models/**/*.js', __dirname + '/lib/**/*.js'];
 var testFiles = ['gulpfile.js', __dirname + "/test/**/*.js"];
 var htmlFiles = ['app/**/*.html'];
@@ -28,14 +31,27 @@ gulp.task('webpack:dev', function() {
   .pipe(gulp.dest('build/'));
 });
 
-gulp.task('css:dev', function() {
-  return gulp.src(['app/css/reset.css', 'app/css/base.css', 'app/css/layout.css', 'app/css/modules.css', 'app/css/state.css'])
-    .pipe(concatCss('styles.min.css'))
-    .pipe(minifyCss())
+gulp.task('webpack:test', function() {
+  return gulp.src('test/client/test_entry.js')
+  .pipe(webpack({
+    output: {
+      filename: 'test_bundle.js'
+    }
+  }))
+  .pipe(gulp.dest('test/client/'));
+});
+
+gulp.task('webpack:sass', function() {
+  return gulp.src(['app/sass/reset.scss', 'app/sass/base.scss', 'app/sass/layout.scss', 'app/sass/modules.scss', 'app/sass/state.scss'])
+    .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sass().on('error', sass.logError))
+      .pipe(concatCss('styles.min.css'))
+      .pipe(minifyCss())
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('build/'));
 })
 
-gulp.task('build:dev', ['static:dev', 'webpack:dev', 'css:dev']);
+gulp.task('build:dev', ['static:dev', 'webpack:dev', 'webpack:sass']);
 
 /* * * * * * * * * * * * * * * * * *
             LINT TASKS
@@ -54,6 +70,7 @@ gulp.task('jshint:testfiles', function() {
     .pipe(jshint({
       node: true,
       globals: {
+        angular: true,
         before: true,
         after: true,
         it: true,
@@ -82,7 +99,7 @@ gulp.task('mocha', function() {
 gulp.task('buildWatch', function() {
   gulp.watch(htmlFiles, ['static:dev']);
   gulp.watch('app/js/**/*.js', ['build:dev']);
-  gulp.watch('app/css/**/*.css', ['css:dev']);
+  gulp.watch('app/sass/**/*.sass', ['webpack:sass']);
 });
 
 // backend
