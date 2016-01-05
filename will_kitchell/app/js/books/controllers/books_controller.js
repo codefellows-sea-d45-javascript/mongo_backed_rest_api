@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.controller('booksController', ['$scope', '$http', function($scope, $http) {
     $scope.books = [];
-    //$scope.newBook = Object.create();
+    $scope.newBook = Object.create();
 
     $scope.getAll = function() {
       $http.get('/api/books')
@@ -12,57 +12,36 @@ module.exports = function(app) {
         });
     };
 
+    $scope.createBook = function(book) {
+      $http.post('/api/books', book)
+      .then(function(res) {
+        $scope.books.push(res.data);
+        $scope.newbook = null;
+      }, function(err) {
+        console.log(err.data);
+      });
+    };
 
+    $scope.updateBook = function(book) {
+      book.editing = false;
+      $http.put('/api/books/' + book._id, book)
+        .then(function(res) {
+          console.log('Book has been updated');
+        }, function(err) {
+          $scope.erros.push('could not get book: ' + book.title + ' by ' + book.author);
+          console.log(err.data);
+        });
+    };
+
+    $scope.deleteBook = function(book) {
+      $scope.books.splice($scope.books.indexOf(book), 1);
+      $http.delete('/api/books/' + book._id)
+        .then(function(res) {
+          console.log('Book was removed from the databas... err shelf');
+        }, function(err) {
+          console.log(err.data)
+          $scope.getAll();
+        });
+    };
   }]);
 };
-
-
-// var angular = window.angular;
-// module.exports = function(app) {
-//   app.controller('BearsController', ['$scope', '$http', 'cfResource', function($scope, $http, cfResource) {
-//     $scope.bears = [];
-//     $scope.errors = [];
-//     $scope.defaults = {flavor: 'grizzly', fishPreference: 'Salmons'};
-//     $scope.newBear = angular.copy($scope.defaults);
-//     var bearsResource = cfResource('bears');
-
-//     $scope.getAll = function() {
-//       bearsResource.getAll(function(err, data) {
-//         if (err) return err;
-
-//         $scope.bears = data;
-//       });
-//     };
-
-//     $scope.create = function(bear) {
-//       bearsResource.create(bear, function(err, data){
-//         if (err) return err;
-//         $scope.bears.push(data);
-//         $scope.newBear = angular.copy($scope.defaults);
-//       });
-//     };
-
-//     $scope.update = function(bear) {
-//       bear.editing = false;
-//       $http.put('/api/bears/' + bear._id, bear)
-//         .then(function(res) {
-//           console.log('this bear has a new identity (placed in bear witness protection)');
-//         }, function(err) {
-//           $scope.errors.push('could not get bear: ' + bear.name + ' to bear trial');
-//           console.log(err.data);
-//         });
-//     };
-
-//     $scope.remove = function(bear) {
-//       $scope.bears.splice($scope.bears.indexOf(bear), 1);
-//       $http.delete('/api/bears/' + bear._id)
-//         .then(function(res) {
-//           console.log('totes cool, bear murdered');
-//         }, function(err) {
-//           console.log(err.data);
-//           $scope.errors.push('could not murderererer bearzzz: ' + bear.name);
-//           $scope.getAll();
-//         });
-//     };
-//   }]);
-// };
