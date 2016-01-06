@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.controller('booksController', ['$scope', '$http', function($scope, $http) {
     $scope.books = [];
-    $scope.newBook = Object.create();
+    $scope.newBook = {};
 
     $scope.getAll = function() {
       $http.get('/api/books')
@@ -16,19 +16,19 @@ module.exports = function(app) {
       $http.post('/api/books', book)
       .then(function(res) {
         $scope.books.push(res.data);
-        $scope.newbook = null;
+        $scope.newBook = null;
       }, function(err) {
         console.log(err.data);
       });
     };
 
     $scope.updateBook = function(book) {
-      book.editing = false;
+      if(book.recommended) book.recommended = false;
+      else book.recommended = true;
       $http.put('/api/books/' + book._id, book)
         .then(function(res) {
-          console.log('Book has been updated');
+          console.log('book recommended status updated.');
         }, function(err) {
-          $scope.erros.push('could not get book: ' + book.title + ' by ' + book.author);
           console.log(err.data);
         });
     };

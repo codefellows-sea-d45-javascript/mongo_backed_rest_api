@@ -8,9 +8,32 @@
 <body data-ng-app="bookStreamApp">
   <h1>Deez Bookz</h1>
   <main data-ng-controller="booksController" data-ng-init="getAll()">
+
+    <form name="newBookForm" class="formContainer" data-ng-submit="createBook(newBook)">
+      <h2>New Book:</h2>
+
+      <label for="newBookTitle">Title:</label>
+      <input type="text" id="newBookTitle" required data-ng-model="newBook.title">
+
+      <label for="newBookAuthor">Author:</label>
+      <input type="text" id="newBookAuthor" required data-ng-model="newBook.author">
+
+      <label for="newBookPublished">Published:</label>
+      <input type="number" id="newBookPublished" data-ng-model="newBook.published">
+
+      <label for="newBookGenre">Genre:</label>
+      <input type="text" id="newBookGenre" data-ng-model="newBook.genre">
+
+      <button type="submit" data-ng-disabled="newBookForm.$invalid">Create New Book</button>
+    </form>
+
     <ul id="booklist">
-      <li data-ng-repeat="book in books">{{book.title}} by {{book.author}}</li>
+      <li data-ng-repeat="book in books">{{book.title}} by {{book.author}}
+        <button ng-click="deleteBook(book)">DELETE</button><br>
+        Would you recommend this book to a friend?<button ng-click="updateBook(book)">{{book.recommended}}</button>
+      </li>
     </ul>
+
   </main>
   <script src="/bundle.js"></script>
 </body>
