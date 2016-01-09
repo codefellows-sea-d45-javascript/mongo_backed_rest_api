@@ -28,7 +28,7 @@ describe('the user routes', function() {
   it('should receive back a token after signing up', function(done) {
     chai.request('localhost:3000')
       .post('/api/signup')
-      .send({username:'wkitchell', password: 'password'})
+      .send({username:'testuser', password: 'testpass'})
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body).to.have.property('token');

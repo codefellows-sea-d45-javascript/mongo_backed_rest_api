@@ -29,7 +29,10 @@
 
     <ul id="booklist">
       <li data-ng-repeat="book in books">{{book.title}} by {{book.author}}
-        <button ng-click="deleteBook(book)">DELETE</button><br>
+        <button ng-click="deleteBook(book)">DELETE</button>
+        <button ng-click="updateBook(book)">EDIT</button>
+        <button class="form-button" data-ng-click="book.editing = false; cancelupdateBook(book)">Cancel!</button>
+        <br>
         Would you recommend this book to a friend?<button ng-click="updateBook(book)">{{book.recommended}}</button>
       </li>
     </ul>

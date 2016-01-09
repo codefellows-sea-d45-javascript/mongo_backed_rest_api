@@ -23,6 +23,7 @@ module.exports = function(app) {
     };
 
     $scope.updateBook = function(book) {
+      book.editing = false;
       if(book.recommended) book.recommended = false;
       else book.recommended = true;
       $http.put('/api/books/' + book._id, book)
@@ -42,6 +43,16 @@ module.exports = function(app) {
           console.log(err.data)
           $scope.getAll();
         });
+    };
+
+    $scope.cancelupdateBook = function(book) {
+      $http.get('/api/books/' + book._id)
+      .then(function(res) {
+        console.log('Cancel Update!');
+        $scope.books[$scope.books.indexOf(book)] = res.data[0];
+      }, function(err) {
+        console.log(err.data);
+      });
     };
   }]);
 };

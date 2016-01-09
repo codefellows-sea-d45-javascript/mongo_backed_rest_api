@@ -1,1 +1,1 @@
-require('./tasks_controller_tests');
+require('./books_controller_tests');
